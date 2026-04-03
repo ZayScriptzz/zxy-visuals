@@ -329,18 +329,18 @@
 .cr-photo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 2px;
+  height: 100%;
 }
 .cr-photo-item:first-child {
   grid-column: 1;
   grid-row: 1 / 3;
-  aspect-ratio: 9 / 16;
 }
 .cr-photo-item {
   position: relative;
   overflow: hidden;
   background: var(--black-3);
-  aspect-ratio: 1 / 1;
 }
 .cr-photo {
   position: absolute;
@@ -365,7 +365,7 @@
   .cr-card-featured { border-top: 1px solid var(--border); border-left: 2px solid var(--blue-bright); }
   .cr-portfolio-grid { grid-template-columns: 1fr; }
   .cr-portfolio-main { aspect-ratio: 9 / 16; max-height: 500px; }
-  .cr-photo-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; }
+  .cr-photo-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; height: auto; }
   .cr-photo-item { aspect-ratio: 1 / 1; }
   .cr-photo-item:first-child { grid-column: 1; grid-row: 1; aspect-ratio: 1 / 1; }
 }
@@ -393,5 +393,5 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 25%;
 }
