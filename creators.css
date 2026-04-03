@@ -361,14 +361,22 @@
   .cr-intro-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .cr-pricing { padding: 5rem 2rem; }
   .cr-cards { grid-template-columns: 1fr; }
+  .cr-card { padding: 1.5rem 1.5rem 2rem; }
   .cr-card-featured { border-top: 1px solid var(--border); border-left: 2px solid var(--blue-bright); }
   .cr-portfolio-grid { grid-template-columns: 1fr; }
   .cr-portfolio-main { aspect-ratio: 9 / 16; max-height: 500px; }
-  .cr-photo-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; }
+  .cr-photo-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; }
   .cr-photo-item { aspect-ratio: 1 / 1; }
+  .cr-photo-item:first-child { grid-column: 1; grid-row: 1; aspect-ratio: 1 / 1; }
 }
 @media (max-width: 600px) {
   .cr-photo-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+  .cr-hero .hero-photo { object-position: center center; }
+  .corner { width: 16px; height: 16px; }
+  .corner.tl, .corner.tr { top: 1rem; }
+  .corner.bl, .corner.br { bottom: 1rem; }
+  .corner.tl, .corner.bl { left: 1rem; }
+  .corner.tr, .corner.br { right: 1rem; }
 }
 
 /* ===== HERO IMAGE FIX ===== */

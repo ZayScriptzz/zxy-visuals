@@ -112,6 +112,24 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
+// ===== HAMBURGER MENU =====
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+if (hamburger && mobileNav) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    document.body.classList.toggle('nav-open');
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    });
+  });
+}
+
 // ===== FORM SUBMIT FEEDBACK =====
 const form = document.getElementById('bookingForm');
 if (form) {
