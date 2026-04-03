@@ -17,7 +17,9 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">ZXY<span class="accent-red">.</span></div>
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="ZXY Visuals" class="nav-logo-img">
+  </div>
   <div class="nav-links">
     <a href="#services" data-en="Services" data-fr="Services">Services</a>
     <a href="#about" data-en="About" data-fr="À propos">About</a>
@@ -29,40 +31,12 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg">
-    <div class="hero-placeholder">
-      <div class="placeholder-grid">
-        <div class="grid-line h" style="top:20%"></div>
-        <div class="grid-line h" style="top:40%"></div>
-        <div class="grid-line h" style="top:60%"></div>
-        <div class="grid-line h" style="top:80%"></div>
-        <div class="grid-line v" style="left:20%"></div>
-        <div class="grid-line v" style="left:40%"></div>
-        <div class="grid-line v" style="left:60%"></div>
-        <div class="grid-line v" style="left:80%"></div>
-        <div class="crosshair"></div>
-        <div class="drone-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="6" stroke="rgba(232,232,240,0.35)" stroke-width="1.5"/>
-            <line x1="40" y1="34" x2="40" y2="10" stroke="rgba(232,232,240,0.15)" stroke-width="1"/>
-            <line x1="40" y1="46" x2="40" y2="70" stroke="rgba(232,232,240,0.15)" stroke-width="1"/>
-            <line x1="34" y1="40" x2="10" y2="40" stroke="rgba(232,232,240,0.15)" stroke-width="1"/>
-            <line x1="46" y1="40" x2="70" y2="40" stroke="rgba(232,232,240,0.15)" stroke-width="1"/>
-            <circle cx="40" cy="10" r="4" stroke="#b82020" stroke-width="1.5"/>
-            <circle cx="40" cy="70" r="4" stroke="#b82020" stroke-width="1.5"/>
-            <circle cx="10" cy="40" r="4" stroke="#1a6bbf" stroke-width="1.5"/>
-            <circle cx="70" cy="40" r="4" stroke="#1a6bbf" stroke-width="1.5"/>
-            <circle cx="40" cy="40" r="18" stroke="rgba(232,232,240,0.07)" stroke-width="1" stroke-dasharray="3 4"/>
-            <circle cx="40" cy="40" r="30" stroke="rgba(232,232,240,0.03)" stroke-width="1" stroke-dasharray="2 6"/>
-          </svg>
-        </div>
-        <div class="scan-line"></div>
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-      </div>
-      <p class="placeholder-note">// Replace with your reel footage</p>
-    </div>
+    <img src="assets/hero.jpg" alt="" class="hero-photo">
+    <div class="hero-overlay"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
   </div>
 
   <div class="hero-content">
@@ -282,6 +256,44 @@
       </div>
     </div>
     <p class="gear-note" data-en="This setup allows flexible shooting — indoors, outdoors, tight spaces, dynamic environments, and everything between." data-fr="Cette configuration permet des tournages flexibles — intérieur, extérieur, espaces restreints, environnements dynamiques, et tout ce qui se trouve entre.">This setup allows flexible shooting — indoors, outdoors, tight spaces, dynamic environments, and everything between.</p>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div class="section-tag" data-en="Recent Work" data-fr="Travaux récents">Recent Work</div>
+    <h2 data-en="Portfolio" data-fr="Portfolio">Portfolio</h2>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item video-item">
+      <video muted loop playsinline preload="metadata" class="portfolio-video" onmouseenter="this.play()" onmouseleave="this.pause()">
+        <source src="assets/work1.mp4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-label" data-en="Aerial · Real Estate" data-fr="Aérien · Immobilier">Aerial · Real Estate</div>
+      </div>
+    </div>
+    <div class="portfolio-item video-item">
+      <video muted loop playsinline preload="metadata" class="portfolio-video" onmouseenter="this.play()" onmouseleave="this.pause()">
+        <source src="assets/work2.mp4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-label" data-en="Drone · Cinematic" data-fr="Drone · Cinématique">Drone · Cinematic</div>
+      </div>
+    </div>
+    <!-- Add more items below as you grow — just copy a .portfolio-item block -->
+    <!-- Photo example:
+    <div class="portfolio-item">
+      <img src="assets/photo1.jpg" alt="ZXY Visuals shoot" class="portfolio-photo">
+      <div class="portfolio-overlay">
+        <div class="portfolio-label">Ground · Portrait</div>
+      </div>
+    </div>
+    -->
+  </div>
+  <div class="portfolio-cta">
+    <a href="https://www.instagram.com/zxypiczz" target="_blank" class="btn-ghost" data-en="More on Instagram" data-fr="Plus sur Instagram">More on Instagram</a>
   </div>
 </section>
 
