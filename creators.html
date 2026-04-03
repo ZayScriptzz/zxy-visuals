@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Sessions — ZXY Visuals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="creators.css">
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursor-trail"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="ZXY Visuals" class="nav-logo-img">
+  </div>
+  <div class="nav-links">
+    <a href="index.html" data-en="Drone & Aerial" data-fr="Drone & Aérien">Drone & Aerial</a>
+    <a href="#sessions" data-en="Sessions" data-fr="Sessions">Sessions</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">🌐 FR</button>
+    <a href="#book" class="nav-cta nav-cta-blue" data-en="Book a Session" data-fr="Réserver">Book a Session</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero cr-hero" id="hero">
+  <div class="hero-bg">
+    <div class="cr-hero-placeholder">
+      <div class="cr-grid-lines">
+        <div class="grid-line h" style="top:25%"></div>
+        <div class="grid-line h" style="top:50%"></div>
+        <div class="grid-line h" style="top:75%"></div>
+        <div class="grid-line v" style="left:33%"></div>
+        <div class="grid-line v" style="left:66%"></div>
+      </div>
+      <div class="cr-frame-corner tl"></div>
+      <div class="cr-frame-corner tr"></div>
+      <div class="cr-frame-corner bl"></div>
+      <div class="cr-frame-corner br"></div>
+      <p class="placeholder-note">// Replace with your best portrait/reel</p>
+    </div>
+    <div class="hero-overlay cr-overlay"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag cr-tag" data-en="Montreal — Ground · R7 · FPV Add-on" data-fr="Montréal — Sol · R7 · FPV en option">Montreal — Ground · R7 · FPV Add-on</div>
+    <h1 class="hero-title">
+      <span class="line" data-en="Step Into" data-fr="Entrez dans">Step Into</span>
+      <span class="line accent-blue-bright" data-en="Your Frame." data-fr="Votre Cadre.">Your Frame.</span>
+      <span class="line cr-stand" data-en="Stand Out." data-fr="Démarquez-vous.">Stand Out.</span>
+    </h1>
+    <p class="hero-sub" data-en="Portrait sessions, reels, and music videos built for creators who want more than a photo — they want a feeling." data-fr="Séances photo, reels et vidéoclips conçus pour les créateurs qui veulent plus qu'une photo — une émotion.">Portrait sessions, reels, and music videos built for creators who want more than a photo — they want a feeling.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary btn-blue" data-en="Book a Session" data-fr="Réserver une session">Book a Session</a>
+      <a href="#sessions" class="btn-ghost" data-en="See Sessions" data-fr="Voir les sessions">See Sessions</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <span data-en="Scroll" data-fr="Défiler">Scroll</span>
+    <div class="scroll-line scroll-line-blue"></div>
+  </div>
+  <div class="hero-badges">
+    <div class="badge"><span class="badge-dot blue"></span><span data-en="Portrait" data-fr="Portrait">Portrait</span></div>
+    <div class="badge"><span class="badge-dot white"></span><span data-en="Reels" data-fr="Reels">Reels</span></div>
+    <div class="badge"><span class="badge-dot red"></span><span data-en="Music Video" data-fr="Vidéoclip">Music Video</span></div>
+  </div>
+</section>
+
+<!-- SESSIONS INTRO -->
+<section class="cr-intro" id="sessions">
+  <div class="cr-intro-inner">
+    <div class="cr-intro-text">
+      <div class="section-tag cr-section-tag" data-en="The Approach" data-fr="L'approche">The Approach</div>
+      <h2 data-en="Two tiers. One standard: <em>yours.</em>" data-fr="Deux niveaux. Un seul standard: <em>le vôtre.</em>">Two tiers. One standard: <em>yours.</em></h2>
+      <p data-en="Every session comes in Standard or Immersive. Standard gives you clean, professional results. Immersive gives you the full treatment — deeper grades, retouching, movement, and the kind of visuals that stop scrolling." data-fr="Chaque session existe en Standard ou Immersive. Le Standard vous donne des résultats propres et professionnels. L'Immersive vous offre le traitement complet — gradation poussée, retouche, mouvement, et des visuels qui arrêtent le scroll.">Every session comes in Standard or Immersive. Standard gives you clean, professional results. Immersive gives you the full treatment — deeper grades, retouching, movement, and the kind of visuals that stop scrolling.</p>
+    </div>
+    <div class="cr-tier-legend">
+      <div class="cr-tier-pill standard-pill">
+        <span class="pill-label" data-en="Standard" data-fr="Standard">Standard</span>
+        <span class="pill-desc" data-en="Clean. Professional. Delivered." data-fr="Propre. Professionnel. Livré.">Clean. Professional. Delivered.</span>
+      </div>
+      <div class="cr-tier-pill immersive-pill">
+        <span class="pill-label" data-en="Immersive" data-fr="Immersive">Immersive</span>
+        <span class="pill-desc" data-en="Full grade. Retouched. Cinematic." data-fr="Gradation complète. Retouché. Cinématique.">Full grade. Retouched. Cinematic.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING GRID -->
+<section class="cr-pricing" id="pricing">
+  <div class="cr-pricing-inner">
+
+    <!-- PHOTO -->
+    <div class="cr-category">
+      <div class="cr-category-label" data-en="Photo Sessions" data-fr="Séances Photo">Photo Sessions</div>
+      <div class="cr-cards">
+
+        <div class="cr-card">
+          <div class="cr-card-tier standard-label" data-en="Standard" data-fr="Standard">Standard</div>
+          <div class="cr-card-price">$60<span class="cr-price-range">–80</span></div>
+          <div class="cr-card-sub" data-en="Portrait · Street · Studio" data-fr="Portrait · Rue · Studio">Portrait · Street · Studio</div>
+          <ul class="cr-card-list">
+            <li data-en="10 edited photos" data-fr="10 photos éditées">10 edited photos</li>
+            <li data-en="Basic color grade" data-fr="Gradation colorimétrique de base">Basic color grade</li>
+            <li data-en="Indoor or outdoor" data-fr="Intérieur ou extérieur">Indoor or outdoor</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+        <div class="cr-card cr-card-featured">
+          <div class="cr-featured-badge" data-en="Immersive" data-fr="Immersive">Immersive</div>
+          <div class="cr-card-price">$160<span class="cr-price-range">–200</span></div>
+          <div class="cr-card-sub" data-en="Portrait · Street · Studio" data-fr="Portrait · Rue · Studio">Portrait · Street · Studio</div>
+          <ul class="cr-card-list">
+            <li data-en="15–20 edited photos" data-fr="15–20 photos éditées">15–20 edited photos</li>
+            <li data-en="Full color grade + retouching" data-fr="Gradation complète + retouche">Full color grade + retouching</li>
+            <li data-en="Indoor & outdoor" data-fr="Intérieur & extérieur">Indoor & outdoor</li>
+            <li data-en="10s reel edit included" data-fr="Montage reel 10s inclus">10s reel edit included</li>
+            <li data-en="Additional photos available" data-fr="Photos supplémentaires disponibles">Additional photos available</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn cr-btn-featured" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIDEO REELS -->
+    <div class="cr-category">
+      <div class="cr-category-label" data-en="Video Reels" data-fr="Reels Vidéo">Video Reels</div>
+      <div class="cr-cards">
+
+        <div class="cr-card">
+          <div class="cr-card-tier standard-label" data-en="Standard" data-fr="Standard">Standard</div>
+          <div class="cr-card-price">$120<span class="cr-price-range">–150</span></div>
+          <div class="cr-card-sub" data-en="15–30s reel" data-fr="Reel 15–30s">15–30s reel</div>
+          <ul class="cr-card-list">
+            <li data-en="15–30s edited reel" data-fr="Reel édité 15–30s">15–30s edited reel</li>
+            <li data-en="Basic color grade" data-fr="Gradation colorimétrique de base">Basic color grade</li>
+            <li data-en="1 location" data-fr="1 emplacement">1 location</li>
+            <li data-en="Social media optimized" data-fr="Optimisé réseaux sociaux">Social media optimized</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+        <div class="cr-card cr-card-featured">
+          <div class="cr-featured-badge" data-en="Immersive" data-fr="Immersive">Immersive</div>
+          <div class="cr-card-price">$220<span class="cr-price-range">–260</span></div>
+          <div class="cr-card-sub" data-en="30–60s reel" data-fr="Reel 30–60s">30–60s reel</div>
+          <ul class="cr-card-list">
+            <li data-en="30–60s edited reel" data-fr="Reel édité 30–60s">30–60s edited reel</li>
+            <li data-en="Full grade + multiple looks" data-fr="Gradation complète + looks multiples">Full grade + multiple looks</li>
+            <li data-en="Multiple locations" data-fr="Emplacements multiples">Multiple locations</li>
+            <li data-en="Transitions + motion effects" data-fr="Transitions + effets de mouvement">Transitions + motion effects</li>
+            <li data-en="Social media optimized" data-fr="Optimisé réseaux sociaux">Social media optimized</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn cr-btn-featured" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MUSIC VIDEO -->
+    <div class="cr-category">
+      <div class="cr-category-label" data-en="Music Video" data-fr="Vidéoclip">Music Video</div>
+      <div class="cr-cards">
+
+        <div class="cr-card">
+          <div class="cr-card-tier standard-label" data-en="Standard" data-fr="Standard">Standard</div>
+          <div class="cr-card-price">$350<span class="cr-price-range">–450</span></div>
+          <div class="cr-card-sub" data-en="Up to 2 mins" data-fr="Jusqu'à 2 mins">Up to 2 mins</div>
+          <ul class="cr-card-list">
+            <li data-en="Up to 2 min edited video" data-fr="Vidéo éditée jusqu'à 2 min">Up to 2 min edited video</li>
+            <li data-en="1–2 locations" data-fr="1–2 emplacements">1–2 locations</li>
+            <li data-en="Color grade + sync to track" data-fr="Gradation + sync à la piste">Color grade + sync to track</li>
+            <li data-en="Ground footage only" data-fr="Vidéo au sol uniquement">Ground footage only</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+        <div class="cr-card cr-card-featured">
+          <div class="cr-featured-badge" data-en="Immersive" data-fr="Immersive">Immersive</div>
+          <div class="cr-card-price">$600<span class="cr-price-range">–800</span></div>
+          <div class="cr-card-sub" data-en="Full production" data-fr="Production complète">Full production</div>
+          <ul class="cr-card-list">
+            <li data-en="Full-length music video" data-fr="Vidéoclip complet">Full-length music video</li>
+            <li data-en="Multiple locations" data-fr="Emplacements multiples">Multiple locations</li>
+            <li data-en="Full cinematic grade" data-fr="Gradation cinématique complète">Full cinematic grade</li>
+            <li data-en="Creative direction included" data-fr="Direction créative incluse">Creative direction included</li>
+            <li data-en="Behind the scenes reel" data-fr="Reel coulisses inclus">Behind the scenes reel</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn cr-btn-featured" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BUNDLES -->
+    <div class="cr-category">
+      <div class="cr-category-label" data-en="Bundles — Photo + Video" data-fr="Forfaits — Photo + Vidéo">Bundles — Photo + Video</div>
+      <div class="cr-cards">
+
+        <div class="cr-card">
+          <div class="cr-card-tier standard-label" data-en="Standard Bundle" data-fr="Forfait Standard">Standard Bundle</div>
+          <div class="cr-card-price">$160<span class="cr-price-range">–190</span></div>
+          <div class="cr-card-sub" data-en="Photo + Reel" data-fr="Photo + Reel">Photo + Reel</div>
+          <ul class="cr-card-list">
+            <li data-en="10 edited photos" data-fr="10 photos éditées">10 edited photos</li>
+            <li data-en="15–30s reel" data-fr="Reel 15–30s">15–30s reel</li>
+            <li data-en="Basic grade on both" data-fr="Gradation de base sur les deux">Basic grade on both</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+        <div class="cr-card cr-card-featured">
+          <div class="cr-featured-badge" data-en="Immersive Bundle" data-fr="Forfait Immersive">Immersive Bundle</div>
+          <div class="cr-card-price">$340<span class="cr-price-range">–400</span></div>
+          <div class="cr-card-sub" data-en="Photo + Reel" data-fr="Photo + Reel">Photo + Reel</div>
+          <ul class="cr-card-list">
+            <li data-en="15–20 edited photos" data-fr="15–20 photos éditées">15–20 edited photos</li>
+            <li data-en="30–60s reel" data-fr="Reel 30–60s">30–60s reel</li>
+            <li data-en="Full grade + retouching on both" data-fr="Gradation complète + retouche">Full grade + retouching on both</li>
+            <li data-en="Indoor & outdoor" data-fr="Intérieur & extérieur">Indoor & outdoor</li>
+            <li data-en="72-hour delivery" data-fr="Livraison en 72 heures">72-hour delivery</li>
+          </ul>
+          <a href="#book" class="cr-btn cr-btn-featured" data-en="Book This" data-fr="Réserver">Book This</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADD-ON -->
+  <div class="cr-addon-strip">
+    <div class="cr-addon-inner">
+      <div class="cr-addon-label" data-en="Add-On Available" data-fr="Supplément disponible">Add-On Available</div>
+      <div class="cr-addon-item">
+        <span data-en="Drone FPV Sequence — adds aerial immersion to any session" data-fr="Séquence Drone FPV — ajoute l'immersion aérienne à toute session">Drone FPV Sequence — adds aerial immersion to any session</span>
+        <span class="cr-addon-price">+$150</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio cr-portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div class="section-tag cr-section-tag" data-en="The Work" data-fr="Le travail">The Work</div>
+    <h2 data-en="Portfolio" data-fr="Portfolio">Portfolio</h2>
+  </div>
+  <div class="cr-portfolio-grid">
+    <!-- Vertical reel -->
+    <div class="portfolio-item cr-portfolio-main">
+      <video autoplay muted loop playsinline class="portfolio-video">
+        <source src="assets/creator-reel.mp4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-label" data-en="Ground · Cinematic" data-fr="Sol · Cinématique">Ground · Cinematic</div>
+      </div>
+    </div>
+    <!-- Photo grid -->
+    <div class="cr-photo-grid">
+      <div class="cr-photo-item">
+        <img src="assets/creator-photo1.jpg" alt="" class="cr-photo">
+        <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
+      </div>
+      <div class="cr-photo-item">
+        <img src="assets/creator-photo2.jpg" alt="" class="cr-photo">
+        <div class="portfolio-overlay"><div class="portfolio-label" data-en="Street" data-fr="Rue">Street</div></div>
+      </div>
+      <div class="cr-photo-item">
+        <img src="assets/creator-photo3.jpg" alt="" class="cr-photo">
+        <div class="portfolio-overlay"><div class="portfolio-label" data-en="Editorial" data-fr="Éditorial">Editorial</div></div>
+      </div>
+      <div class="cr-photo-item">
+        <img src="assets/creator-photo4.jpg" alt="" class="cr-photo">
+        <div class="portfolio-overlay"><div class="portfolio-label" data-en="Cinematic" data-fr="Cinématique">Cinematic</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="portfolio-cta">
+    <a href="https://www.instagram.com/zxypiczz" target="_blank" class="btn-ghost" data-en="More on Instagram" data-fr="Plus sur Instagram">More on Instagram</a>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book" id="book">
+  <div class="book-inner">
+    <div class="book-header">
+      <div class="section-tag cr-section-tag" data-en="Book" data-fr="Réserver">Book</div>
+      <h2 data-en="Let's Create Something." data-fr="Créons quelque chose.">Let's Create Something.</h2>
+      <p data-en="Fill out the form and we'll get back to you within 24 hours to lock in your session." data-fr="Remplissez le formulaire et nous vous répondrons dans les 24 heures pour confirmer votre session.">Fill out the form and we'll get back to you within 24 hours to lock in your session.</p>
+    </div>
+
+    <form class="booking-form" id="bookingForm" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Creator Session Request — ZXY Visuals">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://zayscriptzz.github.io/zxy-visuals/thanks.html">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name" data-en="Full Name" data-fr="Nom complet">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name" data-en-placeholder="Your name" data-fr-placeholder="Votre nom">
+        </div>
+        <div class="form-group">
+          <label for="email" data-en="Email" data-fr="Courriel">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" data-en="Phone (optional)" data-fr="Téléphone (optionnel)">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (514) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="date" data-en="Preferred Date" data-fr="Date préférée">Preferred Date</label>
+          <input type="date" id="date" name="preferred_date" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="session" data-en="Session Type" data-fr="Type de session">Session Type</label>
+        <select id="session" name="session" required>
+          <option value="" disabled selected data-en="Select a session" data-fr="Choisir une session">Select a session</option>
+          <optgroup label="Photo" data-en-label="Photo" data-fr-label="Photo">
+            <option value="Photo Standard — $60–80" data-en="Photo — Standard ($60–80)" data-fr="Photo — Standard (60–80$)">Photo — Standard ($60–80)</option>
+            <option value="Photo Immersive — $160–200" data-en="Photo — Immersive ($160–200)" data-fr="Photo — Immersive (160–200$)">Photo — Immersive ($160–200)</option>
+          </optgroup>
+          <optgroup label="Video Reels">
+            <option value="Reel Standard — $120–150" data-en="Reel — Standard ($120–150)" data-fr="Reel — Standard (120–150$)">Reel — Standard ($120–150)</option>
+            <option value="Reel Immersive — $220–260" data-en="Reel — Immersive ($220–260)" data-fr="Reel — Immersive (220–260$)">Reel — Immersive ($220–260)</option>
+          </optgroup>
+          <optgroup label="Music Video">
+            <option value="Music Video Standard — $350–450" data-en="Music Video — Standard ($350–450)" data-fr="Vidéoclip — Standard (350–450$)">Music Video — Standard ($350–450)</option>
+            <option value="Music Video Immersive — $600–800" data-en="Music Video — Immersive ($600–800)" data-fr="Vidéoclip — Immersive (600–800$)">Music Video — Immersive ($600–800)</option>
+          </optgroup>
+          <optgroup label="Bundles">
+            <option value="Bundle Standard — $160–190" data-en="Bundle — Standard ($160–190)" data-fr="Forfait — Standard (160–190$)">Bundle — Standard ($160–190)</option>
+            <option value="Bundle Immersive — $340–400" data-en="Bundle — Immersive ($340–400)" data-fr="Forfait — Immersive (340–400$)">Bundle — Immersive ($340–400)</option>
+          </optgroup>
+          <option value="Custom" data-en="Custom / Not Sure" data-fr="Personnalisé / Pas encore sûr">Custom / Not Sure</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="location" data-en="Preferred Location / Vibe" data-fr="Emplacement préféré / Ambiance">Preferred Location / Vibe</label>
+        <input type="text" id="location" name="location" placeholder="Studio, street, park, rooftop..." data-en-placeholder="Studio, street, park, rooftop..." data-fr-placeholder="Studio, rue, parc, toiture...">
+      </div>
+
+      <div class="form-group">
+        <label for="details" data-en="Tell Me About Your Vision" data-fr="Parlez-moi de votre vision">Tell Me About Your Vision</label>
+        <textarea id="details" name="details" rows="4" placeholder="Your aesthetic, references, what you're going for — the more detail the better." data-en-placeholder="Your aesthetic, references, what you're going for — the more detail the better." data-fr-placeholder="Votre esthétique, références, ce que vous recherchez — plus de détails, mieux c'est."></textarea>
+      </div>
+
+      <div class="form-addons">
+        <label class="addon-check">
+          <input type="checkbox" name="addon_drone" value="Drone FPV Sequence +$150">
+          <span class="check-box"></span>
+          <span data-en="Add Drone FPV Sequence" data-fr="Ajouter une séquence Drone FPV">Add Drone FPV Sequence</span> <em>+$150</em>
+        </label>
+        <label class="addon-check">
+          <input type="checkbox" name="addon_express" value="Express Delivery +$75">
+          <span class="check-box"></span>
+          <span data-en="Add 24-Hour Express Delivery" data-fr="Livraison express 24h">Add 24-Hour Express Delivery</span> <em>+$75</em>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit btn-submit-blue">
+        <span data-en="Send Session Request" data-fr="Envoyer la demande">Send Session Request</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">ZXY<span class="accent-red">.</span></div>
+    <div class="footer-tagline" data-en="Step Into Your Frame. Stand Out." data-fr="Entrez dans votre cadre. Démarquez-vous.">Step Into Your Frame. Stand Out.</div>
+    <div class="footer-links">
+      <a href="index.html" data-en="Drone & Aerial" data-fr="Drone & Aérien">Drone & Aerial</a>
+      <a href="https://www.instagram.com/zxypiczz" target="_blank">Instagram</a>
+      <a href="sms:4382826329" data-en="Text Us" data-fr="Nous texter">Text Us</a>
+    </div>
+    <div class="footer-copy" data-en="© 2026 ZXY Visuals. Montreal, QC." data-fr="© 2026 ZXY Visuals. Montréal, QC.">© 2026 ZXY Visuals. Montreal, QC.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
