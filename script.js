@@ -130,11 +130,43 @@ if (hamburger && mobileNav) {
   });
 }
 
-// ===== FORM SUBMIT FEEDBACK =====
+// ===== FORM VALIDATION + SUBMIT FEEDBACK =====
 const form = document.getElementById('bookingForm');
 if (form) {
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', (e) => {
+    const required = form.querySelectorAll('[required]');
+    let firstError = null;
+
+    required.forEach(field => {
+      const group = field.closest('.form-group');
+      if (!field.value.trim()) {
+        field.classList.add('field-error');
+        if (group) group.classList.add('field-error');
+        if (!firstError) firstError = field;
+      } else {
+        field.classList.remove('field-error');
+        if (group) group.classList.remove('field-error');
+      }
+    });
+
+    if (firstError) {
+      e.preventDefault();
+      const top = firstError.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top, behavior: 'smooth' });
+      setTimeout(() => firstError.focus(), 400);
+      return;
+    }
+
     const btn = form.querySelector('.btn-submit span');
     if (btn) btn.textContent = currentLang === 'fr' ? 'Envoi en cours...' : 'Sending...';
+  });
+
+  // Clear error state as user fills in fields
+  form.querySelectorAll('[required]').forEach(field => {
+    field.addEventListener('input', () => {
+      field.classList.remove('field-error');
+      const group = field.closest('.form-group');
+      if (group) group.classList.remove('field-error');
+    });
   });
 }
