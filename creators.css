@@ -389,7 +389,7 @@
 .cr-reviews .reviews-submit-btn:hover { border-color: var(--blue-bright); color: var(--white); }
 
 /* ===== FOOTER AXIS — BLUE LOOP COLOR ===== */
-.footer-axis.fa-looping:not(.fa-state-text) .fa-label text { fill: var(--blue-accent); }
+.footer-axis.fa-looping:not(.fa-state-text) .fa-dot { fill: var(--blue-accent); }
 
 /* ===== HERO IMAGE FIX ===== */
 .cr-hero .hero-bg {

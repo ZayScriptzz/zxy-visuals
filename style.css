@@ -586,11 +586,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 
 /* ===== FOOTER AXIS SVG ===== */
 .footer-logo { font-size: 0; line-height: 0; }
-.footer-axis { display: block; width: 180px; height: 128px; margin: 0 auto 1.25rem; }
+.footer-axis { display: block; width: 260px; height: 185px; margin: 0 auto 1.25rem; }
 
-.fa-dot { opacity: 0; transition: opacity 0.3s ease 0.15s, cx 0.7s ease, cy 0.65s ease, r 0.55s ease; }
+.fa-dot { opacity: 0; transition: opacity 0.3s ease 0.15s, cx 0.7s ease, cy 0.65s ease, r 0.55s ease, fill 0.6s ease; }
 .footer-axis.fa-animate .fa-dot { opacity: 1; }
 .footer-axis.fa-state-text .fa-dot { cx: 175px; cy: 106px; r: 5px; }
+.footer-axis.fa-looping:not(.fa-state-text) .fa-dot { fill: var(--red-bright); }
 
 .fa-z { stroke-dasharray: 82; stroke-dashoffset: 82; }
 .fa-x { stroke-dasharray: 104; stroke-dashoffset: 104; }
@@ -623,15 +624,11 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 .footer-axis.fa-looping .fa-label { opacity: 1; transition-delay: 0.25s; }
 .footer-axis.fa-looping.fa-state-text .fa-label { opacity: 0; transition-delay: 0s; }
 
-/* Label text sizing */
-.fa-z-label text, .fa-x-label text, .fa-y-label text { font-size: 14px; }
-.fa-z-label text ~ text, .fa-x-label text ~ text, .fa-y-label text ~ text { font-size: 9px; }
+/* Label text sizing — larger on desktop */
+.fa-z-label text, .fa-x-label text, .fa-y-label text { font-size: 20px; }
+.fa-z-label text ~ text, .fa-x-label text ~ text, .fa-y-label text ~ text { font-size: 11px; }
 
-/* Label color transition to primary on loop */
-.footer-axis.fa-looping .fa-label text { transition: fill 0.55s ease; }
-.footer-axis.fa-looping:not(.fa-state-text) .fa-label text { fill: var(--red-bright); }
-
-@media (max-width: 500px) { .footer-axis { width: 150px; height: 107px; } }
+@media (max-width: 500px) { .footer-axis { width: 180px; height: 128px; } }
 
 /* ===== HAMBURGER ===== */
 .hamburger {
