@@ -206,6 +206,18 @@ if (hamburger && mobileNav) {
   });
 }
 
+// ===== FOOTER AXIS ANIMATION =====
+const footerAxis = document.getElementById('footerAxis');
+if (footerAxis) {
+  const axObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      footerAxis.classList.add('fa-animate');
+      axObs.unobserve(footerAxis);
+    }
+  }, { threshold: 0.4 });
+  axObs.observe(footerAxis);
+}
+
 // ===== FORM VALIDATION + SUBMIT FEEDBACK =====
 const form = document.getElementById('bookingForm');
 if (form) {

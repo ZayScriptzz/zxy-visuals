@@ -460,7 +460,32 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">ZXY<span class="accent-red">.</span></div>
+    <div class="footer-logo">
+      <svg class="footer-axis" id="footerAxis" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" aria-label="ZXY Visuals">
+        <circle class="fa-origin" cx="88" cy="95" r="2.5" fill="rgba(232,232,240,0.55)"/>
+        <!-- Z — altitude, red -->
+        <line class="fa-line fa-z" x1="88" y1="95" x2="88" y2="15" stroke="#b82020" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-z-label">
+          <polyline points="84,20 88,15 92,20" fill="none" stroke="#b82020" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="93" y="13" fill="#b82020" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2">Z</text>
+          <text x="93" y="25" fill="#b82020" font-family="'Barlow Condensed',sans-serif" font-size="6.5" letter-spacing="1.5" opacity="0.65">45.5017° N</text>
+        </g>
+        <!-- X — longitude, blue -->
+        <line class="fa-line fa-x" x1="88" y1="95" x2="190" y2="95" stroke="#1a6bbf" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-x-label">
+          <polyline points="185,91 190,95 185,99" fill="none" stroke="#1a6bbf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="194" y="91" fill="#1a6bbf" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2">X</text>
+          <text x="194" y="102" fill="#1a6bbf" font-family="'Barlow Condensed',sans-serif" font-size="6.5" letter-spacing="1.5" opacity="0.65">73.5673° W</text>
+        </g>
+        <!-- Y — depth, dim white -->
+        <line class="fa-line fa-y" x1="88" y1="95" x2="20" y2="130" stroke="rgba(232,232,240,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-y-label">
+          <polyline points="25,131 20,130 23,126" fill="none" stroke="rgba(232,232,240,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="12" y="143" fill="rgba(232,232,240,0.35)" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2" text-anchor="middle">Y</text>
+          <text x="12" y="155" fill="rgba(232,232,240,0.35)" font-family="'Barlow Condensed',sans-serif" font-size="9" letter-spacing="1" opacity="0.65" text-anchor="middle">&#x221E;</text>
+        </g>
+      </svg>
+    </div>
     <div class="footer-tagline" data-en="See It. Feel It. Enter the Frame." data-fr="Voyez-le. Ressentez-le. Entrez dans le Cadre.">See It. Feel It. Enter the Frame.</div>
     <div class="footer-links">
       <a href="https://www.instagram.com/zaypiczz" target="_blank">Instagram</a>
