@@ -388,6 +388,9 @@
 .cr-reviews .reviews-prev:hover, .cr-reviews .reviews-next:hover { border-color: var(--blue-bright); }
 .cr-reviews .reviews-submit-btn:hover { border-color: var(--blue-bright); color: var(--white); }
 
+/* ===== FOOTER AXIS — BLUE LOOP COLOR ===== */
+.footer-axis.fa-looping:not(.fa-state-text) .fa-label text { fill: var(--blue-accent); }
+
 /* ===== HERO IMAGE FIX ===== */
 .cr-hero .hero-bg {
   position: absolute;

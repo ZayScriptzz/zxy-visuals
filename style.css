@@ -623,6 +623,14 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 .footer-axis.fa-looping .fa-label { opacity: 1; transition-delay: 0.25s; }
 .footer-axis.fa-looping.fa-state-text .fa-label { opacity: 0; transition-delay: 0s; }
 
+/* Label text sizing */
+.fa-z-label text, .fa-x-label text, .fa-y-label text { font-size: 14px; }
+.fa-z-label text ~ text, .fa-x-label text ~ text, .fa-y-label text ~ text { font-size: 9px; }
+
+/* Label color transition to primary on loop */
+.footer-axis.fa-looping .fa-label text { transition: fill 0.55s ease; }
+.footer-axis.fa-looping:not(.fa-state-text) .fa-label text { fill: var(--red-bright); }
+
 @media (max-width: 500px) { .footer-axis { width: 150px; height: 107px; } }
 
 /* ===== HAMBURGER ===== */
