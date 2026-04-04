@@ -213,6 +213,17 @@ if (footerAxis) {
     if (entries[0].isIntersecting) {
       footerAxis.classList.add('fa-animate');
       axObs.unobserve(footerAxis);
+      // After draw-in completes, start the loop
+      setTimeout(() => {
+        footerAxis.classList.add('fa-looping');
+        let isTextState = false;
+        const toggleAxisState = () => {
+          isTextState = !isTextState;
+          footerAxis.classList.toggle('fa-state-text', isTextState);
+          setTimeout(toggleAxisState, 3500);
+        };
+        toggleAxisState();
+      }, 3200);
     }
   }, { threshold: 0.1, rootMargin: '0px 0px 80px 0px' });
   axObs.observe(footerAxis);

@@ -586,18 +586,16 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 
 /* ===== FOOTER AXIS SVG ===== */
 .footer-logo { font-size: 0; line-height: 0; }
-.footer-axis {
-  display: block;
-  width: 180px;
-  height: 128px;
-  margin: 0 auto 1.25rem;
-}
-.fa-origin { opacity: 0; transition: opacity 0.3s ease 0.15s; }
-.footer-axis.fa-animate .fa-origin { opacity: 1; }
+.footer-axis { display: block; width: 180px; height: 128px; margin: 0 auto 1.25rem; }
+
+.fa-dot { opacity: 0; transition: opacity 0.3s ease 0.15s, cx 0.7s ease, cy 0.65s ease, r 0.55s ease; }
+.footer-axis.fa-animate .fa-dot { opacity: 1; }
+.footer-axis.fa-state-text .fa-dot { cx: 175px; cy: 106px; r: 5px; }
 
 .fa-z { stroke-dasharray: 82; stroke-dashoffset: 82; }
 .fa-x { stroke-dasharray: 104; stroke-dashoffset: 104; }
 .fa-y { stroke-dasharray: 78; stroke-dashoffset: 78; }
+.fa-line { transition: opacity 0.5s ease; }
 
 .footer-axis.fa-animate .fa-z { animation: fa-draw 0.7s ease forwards; }
 .footer-axis.fa-animate .fa-x { animation: fa-draw 0.7s ease 0.55s forwards; }
@@ -609,7 +607,23 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 .footer-axis.fa-animate .fa-x-label { transition-delay: 1.25s; opacity: 1; }
 .footer-axis.fa-animate .fa-y-label { transition-delay: 1.8s;  opacity: 1; }
 
-@media (max-width: 500px) { .footer-axis { width: 150px; } }
+.fa-text-zxy {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  fill: rgba(232,232,240,0.92);
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+
+.footer-axis.fa-state-text .fa-line  { opacity: 0; }
+.footer-axis.fa-state-text .fa-label { opacity: 0; transition-delay: 0s; }
+.footer-axis.fa-state-text .fa-text-zxy { opacity: 1; }
+
+.footer-axis.fa-looping .fa-label { opacity: 1; transition-delay: 0.25s; }
+.footer-axis.fa-looping.fa-state-text .fa-label { opacity: 0; transition-delay: 0s; }
+
+@media (max-width: 500px) { .footer-axis { width: 150px; height: 107px; } }
 
 /* ===== HAMBURGER ===== */
 .hamburger {
