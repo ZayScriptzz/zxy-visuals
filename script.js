@@ -73,6 +73,24 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 80);
 }, { passive: true });
 
+// ===== HERO PARALLAX =====
+(function() {
+  const heroPhoto = document.querySelector('.hero-photo');
+  if (!heroPhoto) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => {
+        heroPhoto.style.transform = 'translateY(' + (window.scrollY * -0.18) + 'px)';
+        ticking = false;
+      });
+    }
+  }, { passive: true });
+})();
+
 // ===== SCROLL REVEAL =====
 const revealTargets = [
   '.service-card', '.package-card', '.stat-item',

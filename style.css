@@ -349,6 +349,40 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease; }
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* Section tag line grows in on reveal */
+.section-tag::before { width: 0; transition: width 0.45s ease 0.2s; }
+.reveal.visible .section-tag::before,
+.section-tag:not(.reveal)::before { width: 18px; }
+
+/* ===== HOVER MOTION (pointer devices only) ===== */
+@media (hover: hover) {
+  /* Card lift */
+  .service-card { transition: background 0.35s, transform 0.3s ease, box-shadow 0.3s ease; }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
+  .package-card { transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease; }
+  .package-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .gear-item { transition: border-color 0.25s, background 0.25s, transform 0.25s ease; }
+  .gear-item:hover { transform: translateY(-3px); }
+  /* Nav underline */
+  .nav-links a:not(.nav-cta):not(.lang-toggle) { position: relative; }
+  .nav-links a:not(.nav-cta):not(.lang-toggle)::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: currentColor; transition: width 0.25s ease;
+  }
+  .nav-links a:not(.nav-cta):not(.lang-toggle):hover::after { width: 100%; }
+}
+
+/* Hero photo parallax — driven by JS */
+.hero-photo { will-change: transform; }
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transform: none; transition: opacity 0.3s ease; }
+  .reveal.visible { transform: none; }
+  .section-tag::before { transition: none; width: 18px; }
+  .hero-photo { will-change: auto; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   #nav{padding:1.25rem 2rem}

@@ -388,6 +388,12 @@
 .cr-reviews .reviews-prev:hover, .cr-reviews .reviews-next:hover { border-color: var(--blue-bright); }
 .cr-reviews .reviews-submit-btn:hover { border-color: var(--blue-bright); color: var(--white); }
 
+/* ===== HOVER LIFT — CREATOR CARDS ===== */
+@media (hover: hover) {
+  .cr-card { transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease; }
+  .cr-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+}
+
 /* ===== FOOTER AXIS — BLUE LOOP COLOR ===== */
 .footer-axis.fa-looping:not(.fa-state-text) .fa-dot { fill: var(--blue-accent); }
 
