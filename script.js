@@ -112,6 +112,82 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
+// ===== REVIEW CAROUSEL =====
+function initReviews() {
+  const track = document.getElementById('reviewsTrack');
+  const dotsContainer = document.getElementById('reviewsDots');
+  const prevBtn = document.querySelector('.reviews-prev');
+  const nextBtn = document.querySelector('.reviews-next');
+  const toggleBtn = document.getElementById('reviewToggle');
+  const reviewForm = document.getElementById('reviewForm');
+  if (!track || !window.ZXY_REVIEWS) return;
+
+  const reviews = window.ZXY_REVIEWS;
+  let current = 0;
+  let timer;
+
+  reviews.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML =
+      '<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<p class="review-text">' + r.text + '</p>' +
+      '<div class="review-meta">' +
+        '<span class="review-name">' + r.name + '</span>' +
+        '<span class="review-service">' + r.service + '</span>' +
+      '</div>';
+    track.appendChild(card);
+  });
+
+  reviews.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Review ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    current = (index + reviews.length) % reviews.length;
+    track.style.transform = 'translateX(-' + current * 100 + '%)';
+    dotsContainer.querySelectorAll('.reviews-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 5500);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  const wrapper = track.parentElement;
+  wrapper.addEventListener('mouseenter', () => clearInterval(timer));
+  wrapper.addEventListener('mouseleave', resetTimer);
+
+  let touchX = 0;
+  track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+  });
+
+  if (toggleBtn && reviewForm) {
+    toggleBtn.addEventListener('click', () => {
+      const open = reviewForm.classList.toggle('open');
+      toggleBtn.textContent = open
+        ? (currentLang === 'fr' ? 'Annuler' : 'Cancel')
+        : (currentLang === 'fr' ? 'Laisser un avis' : 'Leave a Review');
+    });
+  }
+
+  resetTimer();
+}
+initReviews();
+
 // ===== HAMBURGER MENU =====
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');

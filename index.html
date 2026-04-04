@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZXY Visuals — Drone & FPV Videography Montreal</title>
-<meta name="description" content="Montreal's cinematic drone, FPV & ground videography studio. Aerial footage for real estate, brands, events & creators. 4K. 48h delivery. Book your shoot.">
-<meta name="keywords" content="drone videography Montreal, FPV videography Montreal, aerial photography Montreal, real estate video Montreal, cinematic drone footage, DJI drone Montreal, FPV drone Quebec, drone cinematography">
+<meta name="description" content="ZXY Visuals — Cinematic drone, FPV and ground videography in Montreal. Aerial photography, immersive FPV walkthroughs and creator sessions.">
+<meta name="keywords" content="drone videography Montreal, FPV videography Montreal, aerial photography Montreal, real estate drone Montreal, creator sessions Montreal">
 <meta name="author" content="ZXY Visuals">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#020204">
@@ -14,8 +14,8 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZXY Visuals">
-<meta property="og:title" content="ZXY Visuals — Drone & FPV Videography Montreal">
-<meta property="og:description" content="Cinematic drone, FPV & ground footage for real estate, brands, events & creators. Montreal-based. 4K. 48h delivery.">
+<meta property="og:title" content="ZXY Visuals — See It. Feel It. Enter the Frame.">
+<meta property="og:description" content="Cinematic drone, FPV and ground videography in Montreal.">
 <meta property="og:url" content="https://zayscriptzz.github.io/zxy-visuals/">
 <meta property="og:image" content="https://zayscriptzz.github.io/zxy-visuals/assets/hero.JPG">
 
@@ -330,6 +330,51 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="section-tag" data-en="Client Reviews" data-fr="Avis clients">Client Reviews</div>
+      <h2 data-en="What They Said." data-fr="Ce qu'ils ont dit.">What They Said.</h2>
+    </div>
+    <div class="reviews-carousel">
+      <button class="reviews-prev" aria-label="Previous">&#8592;</button>
+      <div class="reviews-track-wrapper">
+        <div class="reviews-track" id="reviewsTrack"></div>
+      </div>
+      <button class="reviews-next" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="reviews-dots" id="reviewsDots"></div>
+    <div class="reviews-submit-area">
+      <button class="reviews-submit-btn" id="reviewToggle" data-en="Leave a Review" data-fr="Laisser un avis">Leave a Review</button>
+      <form class="reviews-form" id="reviewForm" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Review — ZXY Visuals">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://zayscriptzz.github.io/zxy-visuals/thanks.html">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-en="Your Name" data-fr="Votre nom">Your Name</label>
+            <input type="text" name="reviewer_name" required data-en-placeholder="First name + last initial" data-fr-placeholder="Prénom + initiale" placeholder="First name + last initial">
+          </div>
+          <div class="form-group">
+            <label data-en="Service Used" data-fr="Service utilisé">Service Used</label>
+            <input type="text" name="service_used" data-en-placeholder="e.g. Premium Package" data-fr-placeholder="ex. Forfait Premium" placeholder="e.g. Premium Package">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-en="Your Review" data-fr="Votre avis">Your Review</label>
+          <textarea name="review_text" rows="3" required data-en-placeholder="What was your experience working with ZXY?" data-fr-placeholder="Quelle a été votre expérience?" placeholder="What was your experience working with ZXY?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" style="max-width:320px">
+          <span data-en="Submit Review" data-fr="Soumettre l'avis">Submit Review</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- BOOK -->
 <section class="book" id="book">
   <div class="book-inner">
@@ -426,6 +471,20 @@
   </div>
 </footer>
 
+<script>
+window.ZXY_REVIEWS = [
+  { name: "Marc-André T.", service: "Premium Package · Real Estate",
+    text: "ZXY completely changed how I present my listings. The FPV walkthrough alone had three clients call within 24 hours of going live. Nothing else comes close." },
+  { name: "Sofia R.", service: "Brand Visuals · Commercial",
+    text: "We used ZXY for a product launch campaign and the aerial footage was cinematic on a level I didn't expect from a local studio. It stopped the scroll every single time." },
+  { name: "David K.", service: "Event Coverage · Gala",
+    text: "Covered our annual fundraiser from every angle — wide drone establishing shots, tight FPV passes through the crowd. The highlight reel had people sharing it all week." },
+  { name: "Isabelle M.", service: "Standard Package · Real Estate",
+    text: "Sold the condo in 5 days. The video made the space look massive and the neighbourhood feel like a lifestyle choice. Worth every dollar, no question." },
+  { name: "Kevin L.", service: "Multi-Location · Development",
+    text: "Needed aerial coverage across four properties in one day. Showed up prepared, executed clean, delivered inside 48 hours. That's the standard I'll expect from everyone now." }
+];
+</script>
 <script src="script.js"></script>
 </body>
 </html>

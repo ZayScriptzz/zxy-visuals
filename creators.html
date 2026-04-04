@@ -317,6 +317,51 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="reviews cr-reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="section-tag cr-section-tag" data-en="Creator Reviews" data-fr="Avis créateurs">Creator Reviews</div>
+      <h2 data-en="What They Said." data-fr="Ce qu'ils ont dit.">What They Said.</h2>
+    </div>
+    <div class="reviews-carousel">
+      <button class="reviews-prev" aria-label="Previous">&#8592;</button>
+      <div class="reviews-track-wrapper">
+        <div class="reviews-track" id="reviewsTrack"></div>
+      </div>
+      <button class="reviews-next" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="reviews-dots" id="reviewsDots"></div>
+    <div class="reviews-submit-area">
+      <button class="reviews-submit-btn" id="reviewToggle" data-en="Leave a Review" data-fr="Laisser un avis">Leave a Review</button>
+      <form class="reviews-form" id="reviewForm" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Review — ZXY Visuals Creator Sessions">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://zayscriptzz.github.io/zxy-visuals/thanks.html">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-en="Your Name" data-fr="Votre nom">Your Name</label>
+            <input type="text" name="reviewer_name" required data-en-placeholder="First name + last initial" data-fr-placeholder="Prénom + initiale" placeholder="First name + last initial">
+          </div>
+          <div class="form-group">
+            <label data-en="Session Type" data-fr="Type de session">Session Type</label>
+            <input type="text" name="service_used" data-en-placeholder="e.g. Immersive Photo" data-fr-placeholder="ex. Photo Immersive" placeholder="e.g. Immersive Photo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-en="Your Review" data-fr="Votre avis">Your Review</label>
+          <textarea name="review_text" rows="3" required data-en-placeholder="What was your session like?" data-fr-placeholder="Comment s'est passée votre session?" placeholder="What was your session like?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit btn-submit-blue" style="max-width:320px">
+          <span data-en="Submit Review" data-fr="Soumettre l'avis">Submit Review</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- BOOK -->
 <section class="book" id="book">
   <div class="book-inner">
@@ -423,6 +468,20 @@
   </div>
 </footer>
 
+<script>
+window.ZXY_REVIEWS = [
+  { name: "Aaliyah J.", service: "Immersive Photo · Portrait",
+    text: "I've done a lot of shoots. This was different. The editing made my skin, the light, the whole vibe feel intentional. My following literally grew after I posted these." },
+  { name: "Théo B.", service: "Music Video · Immersive",
+    text: "ZXY directed the whole visual concept with me. The grade on the final cut matched the energy of the track perfectly. Real creative partner, not just a camera guy." },
+  { name: "Camille F.", service: "Immersive Bundle · Reel + Photo",
+    text: "The reel got 40K plays in three days and the photos are still my best-performing content three months later. Every frame was intentional." },
+  { name: "Jordan N.", service: "Reel · Standard",
+    text: "Quick session, zero wasted time. Got exactly what I needed for the drop — clean, cinematic, delivered on time. Already booked the next one." },
+  { name: "Maïa S.", service: "Immersive Photo · Editorial",
+    text: "The way he uses light and framing is genuinely different. I came in with a vague idea and left with a full set I'm proud of. Immersive tier is absolutely worth it." }
+];
+</script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -379,6 +379,15 @@
   .corner.tr, .corner.br { right: 1rem; }
 }
 
+/* ===== REVIEWS — BLUE OVERRIDES ===== */
+.cr-reviews::before { background: linear-gradient(90deg, transparent, var(--blue-bright), transparent); }
+.cr-reviews .review-card::before { background: linear-gradient(90deg, var(--blue-mid), transparent); }
+.cr-reviews .review-stars { color: var(--blue-accent); }
+.cr-reviews .review-service { color: var(--blue-accent); }
+.cr-reviews .reviews-dot.active { background: var(--blue-accent); }
+.cr-reviews .reviews-prev:hover, .cr-reviews .reviews-next:hover { border-color: var(--blue-bright); }
+.cr-reviews .reviews-submit-btn:hover { border-color: var(--blue-bright); color: var(--white); }
+
 /* ===== HERO IMAGE FIX ===== */
 .cr-hero .hero-bg {
   position: absolute;
