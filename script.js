@@ -214,7 +214,7 @@ if (footerAxis) {
       footerAxis.classList.add('fa-animate');
       axObs.unobserve(footerAxis);
     }
-  }, { threshold: 0.4 });
+  }, { threshold: 0.1, rootMargin: '0px 0px 80px 0px' });
   axObs.observe(footerAxis);
 }
 

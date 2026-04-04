@@ -589,7 +589,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 .footer-axis {
   display: block;
   width: 180px;
-  height: auto;
+  height: 128px;
   margin: 0 auto 1.25rem;
 }
 .fa-origin { opacity: 0; transition: opacity 0.3s ease 0.15s; }
