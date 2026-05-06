@@ -247,6 +247,14 @@ if (footerAxis) {
   axObs.observe(footerAxis);
 }
 
+// ===== DATE PICKER — FUTURE DATES ONLY =====
+const dateInput = document.getElementById('date');
+if (dateInput) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+}
+
 // ===== FORM VALIDATION + SUBMIT FEEDBACK =====
 const form = document.getElementById('bookingForm');
 if (form) {
