@@ -382,6 +382,8 @@
 .cr-reviews .reviews-dot.active { background: var(--blue-accent); }
 .cr-reviews .reviews-prev:hover, .cr-reviews .reviews-next:hover { border-color: var(--blue-bright); }
 .cr-reviews .reviews-submit-btn:hover { border-color: var(--blue-bright); color: var(--white); }
+.cr-reviews .star-btn.active { color: var(--blue-accent); }
+.cr-reviews .star-btn.hover-preview { color: var(--blue-mid); }
 
 /* ===== HOVER LIFT — CREATOR CARDS ===== */
 @media (hover: hover) {

@@ -610,6 +610,19 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
   animation: fade-up 0.35s ease forwards;
 }
 .reviews-form.open { display: flex; }
+
+/* Star rating */
+.star-rating { display: flex; gap: 0.35rem; }
+.star-btn {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-size: 1.6rem; color: var(--border-hover);
+  transition: color 0.15s, transform 0.15s;
+}
+.star-btn:hover { transform: scale(1.15); }
+.star-btn.active { color: var(--red-bright); }
+.star-btn.hover-preview { color: var(--red-mid); }
+.star-rating.star-error .star-btn { animation: star-shake 0.3s ease; }
+@keyframes star-shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 @media (max-width: 900px) {
   .reviews { padding: 5rem 2rem; }
   .reviews-prev, .reviews-next { display: none; }

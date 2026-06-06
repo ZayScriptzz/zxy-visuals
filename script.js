@@ -544,6 +544,50 @@ if (footerAxis) {
   window.ZXY_LIGHTBOX = { open: openLightbox };
 })();
 
+// ===== STAR RATING =====
+(function() {
+  var container = document.getElementById('starRating');
+  var hidden = document.getElementById('ratingValue');
+  if (!container || !hidden) return;
+  var stars = container.querySelectorAll('.star-btn');
+  var selected = 0;
+
+  function updateStars(count, className) {
+    stars.forEach(function(s, i) {
+      s.classList.toggle(className, i < count);
+    });
+  }
+
+  stars.forEach(function(star) {
+    star.addEventListener('click', function() {
+      selected = parseInt(star.dataset.value);
+      hidden.value = selected;
+      updateStars(selected, 'active');
+      container.classList.remove('star-error');
+    });
+    star.addEventListener('mouseenter', function() {
+      var val = parseInt(star.dataset.value);
+      updateStars(val, 'hover-preview');
+    });
+    star.addEventListener('mouseleave', function() {
+      stars.forEach(function(s) { s.classList.remove('hover-preview'); });
+    });
+  });
+
+  // Validation — intercept form submit
+  var form = container.closest('form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (!hidden.value) {
+        e.preventDefault();
+        container.classList.add('star-error');
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() { container.classList.remove('star-error'); }, 600);
+      }
+    });
+  }
+})();
+
 // ===== DATE PICKER — FUTURE DATES ONLY =====
 const dateInput = document.getElementById('date');
 if (dateInput) {
