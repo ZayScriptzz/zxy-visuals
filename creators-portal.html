@@ -63,37 +63,54 @@
 </section>
 
 <!-- PORTAL GRID -->
-<section style="padding: 0 4rem 6rem; background: var(--black-2);">
+<section style="padding: 2rem 4rem 6rem; background: var(--black-2);">
   <div class="portal-grid">
 
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo7.jpg">
-      <img src="assets/creator-photo7.jpg" alt="Portrait">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
+    <!-- Nathaniel B. — 3-image stack -->
+    <div class="portal-cell">
+      <div class="portal-stack" tabindex="0" aria-label="View Nathaniel B. series, 3 images"
+           data-images='[{"src":"assets/creator-photo7.jpg","type":"image","alt":"Portrait — looking down, cinematic lighting, cap and jacket"},{"src":"assets/creator-photo5.jpg","type":"image","alt":"Portrait — front-facing, bucket hat, blue hoodie"},{"src":"assets/creator-photo6.jpg","type":"image","alt":"Profile — side angle, cap turned back, clock background"}]'>
+        <div class="stack-layer stack-back-2" style="background-image: url(assets/creator-photo6.jpg)"></div>
+        <div class="stack-layer stack-back-1" style="background-image: url(assets/creator-photo5.jpg)"></div>
+        <div class="stack-front">
+          <img src="assets/creator-photo7.jpg" alt="Portrait — looking down, cinematic lighting, cap and jacket">
+          <span class="stack-count">3</span>
+          <div class="portfolio-overlay"><div class="portfolio-label" data-en="Nathaniel B." data-fr="Nathaniel B.">Nathaniel B.</div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo2.jpg">
-      <img src="assets/creator-photo2.jpg" alt="Street">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Street" data-fr="Rue">Street</div></div>
+    <!-- Street — single -->
+    <div class="portal-cell">
+      <div class="portal-stack" tabindex="0" aria-label="View Street portrait"
+           data-images='[{"src":"assets/creator-photo2.jpg","type":"image","alt":"Street portrait — varsity jacket, urban night"}]'>
+        <div class="stack-front">
+          <img src="assets/creator-photo2.jpg" alt="Street portrait — varsity jacket, urban night">
+          <div class="portfolio-overlay"><div class="portfolio-label" data-en="Street" data-fr="Rue">Street</div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo3.jpg">
-      <img src="assets/creator-photo3.jpg" alt="Editorial">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Editorial" data-fr="&Eacute;ditorial">Editorial</div></div>
+    <!-- Editorial — single -->
+    <div class="portal-cell">
+      <div class="portal-stack" tabindex="0" aria-label="View Editorial portrait"
+           data-images='[{"src":"assets/creator-photo3.jpg","type":"image","alt":"Editorial portrait — oceanside, blue tones"}]'>
+        <div class="stack-front">
+          <img src="assets/creator-photo3.jpg" alt="Editorial portrait — oceanside, blue tones">
+          <div class="portfolio-overlay"><div class="portfolio-label" data-en="Editorial" data-fr="&Eacute;ditorial">Editorial</div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo4.jpg">
-      <img src="assets/creator-photo4.jpg" alt="Cinematic">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Cinematic" data-fr="Cin&eacute;matique">Cinematic</div></div>
-    </div>
-
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo5.jpg">
-      <img src="assets/creator-photo5.jpg" alt="Portrait">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
-    </div>
-
-    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo6.jpg">
-      <img src="assets/creator-photo6.jpg" alt="Profile">
-      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Profile" data-fr="Profil">Profile</div></div>
+    <!-- Cinematic — single -->
+    <div class="portal-cell">
+      <div class="portal-stack" tabindex="0" aria-label="View Cinematic portrait"
+           data-images='[{"src":"assets/creator-photo4.jpg","type":"image","alt":"Cinematic portrait — basketball court, action"}]'>
+        <div class="stack-front">
+          <img src="assets/creator-photo4.jpg" alt="Cinematic portrait — basketball court, action">
+          <div class="portfolio-overlay"><div class="portfolio-label" data-en="Cinematic" data-fr="Cin&eacute;matique">Cinematic</div></div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -103,10 +120,10 @@
 <section style="padding: 4rem; background: var(--black); border-top: 1px solid var(--border);">
   <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center;">
     <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: 0.02em; line-height: 1;" data-en="Like what you see?" data-fr="Vous aimez ce que vous voyez?">Like what you see?</h2>
-    <p style="color: var(--white-dim); font-size: 0.92rem;" data-en="Book a session and let's create something that stops the scroll." data-fr="R&eacute;servez une session et cr&eacute;ons quelque chose qui arr&ecirc;te le scroll.">Book a session and let's create something that stops the scroll.</p>
+    <p style="color: var(--white-dim); font-size: 0.92rem;" data-en="Book a session. Let's break the frame together." data-fr="R&eacute;servez une session. Brisons le cadre ensemble.">Book a session. Let's break the frame together.</p>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
       <a href="creators.html#book" class="btn-primary btn-blue" data-en="Book a Session" data-fr="R&eacute;server une session">Book a Session</a>
-      <a href="creators.html" class="btn-ghost" data-en="Back to Sessions" data-fr="Retour aux sessions">Back to Sessions</a>
+      <a href="creators.html#portfolio" class="btn-ghost" data-en="Back to Portfolio" data-fr="Retour au portfolio">Back to Portfolio</a>
     </div>
   </div>
 </section>
@@ -149,10 +166,7 @@
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" aria-label="Close">&times;</button>
-  <div class="lightbox-content" id="lightboxContent"></div>
-</div>
+<div class="lightbox" id="lightbox"></div>
 
 <script src="script.js"></script>
 </body>
