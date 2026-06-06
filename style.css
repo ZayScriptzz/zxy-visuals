@@ -638,7 +638,7 @@ body.lb-cursor-fading .cursor-trail {
 }
 body.lb-cursor-visible .cursor,
 body.lb-cursor-visible .cursor-trail {
-  opacity: 1; transition: opacity 150ms ease;
+  opacity: 1; transition: opacity 400ms ease;
 }
 .lightbox-close {
   position: fixed; top: 1.5rem; right: 2rem;

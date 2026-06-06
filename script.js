@@ -494,13 +494,16 @@ if (footerAxis) {
 
   // ===== CURSOR AUTO-HIDE IN LIGHTBOX =====
   var cursorTimer = null;
+  var onMedia = false;
 
   function showLbCursor() {
     lightbox.classList.remove('lb-cursor-hidden');
     document.body.classList.remove('lb-cursor-fading');
     document.body.classList.add('lb-cursor-visible');
     clearTimeout(cursorTimer);
-    cursorTimer = setTimeout(hideLbCursor, 2000);
+    if (onMedia) {
+      cursorTimer = setTimeout(hideLbCursor, 2000);
+    }
   }
 
   function hideLbCursor() {
@@ -515,12 +518,26 @@ if (footerAxis) {
 
   function stopLbCursorHide() {
     clearTimeout(cursorTimer);
+    onMedia = false;
     lightbox.classList.remove('lb-cursor-hidden');
     document.body.classList.remove('lb-cursor-fading', 'lb-cursor-visible');
   }
 
-  lightbox.addEventListener('mousemove', function() {
-    if (lightbox.classList.contains('open')) showLbCursor();
+  // Track whether cursor is over the image/video
+  mainArea.addEventListener('mouseenter', function() {
+    onMedia = true;
+    if (lightbox.classList.contains('open')) {
+      clearTimeout(cursorTimer);
+      cursorTimer = setTimeout(hideLbCursor, 2000);
+    }
+  });
+  mainArea.addEventListener('mouseleave', function() {
+    onMedia = false;
+    clearTimeout(cursorTimer);
+    showLbCursor();
+  });
+  mainArea.addEventListener('mousemove', function() {
+    if (lightbox.classList.contains('open') && onMedia) showLbCursor();
   });
 
   // Expose for external use
