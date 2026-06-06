@@ -51,12 +51,12 @@ ul { list-style: none; }
 /* ===== CURSOR ===== */
 .cursor {
   width: 7px; height: 7px; background: var(--red-bright); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10000;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10010;
   transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
 }
 .cursor-trail {
   width: 28px; height: 28px; border: 1px solid rgba(26,107,191,0.35); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10009;
   transform: translate(-50%, -50%); transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s, border-color 0.2s;
 }
 
