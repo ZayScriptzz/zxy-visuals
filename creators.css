@@ -333,10 +333,6 @@
   gap: 2px;
   height: 100%;
 }
-.cr-photo-item:first-child {
-  grid-column: 1;
-  grid-row: 1 / 3;
-}
 .cr-photo-item {
   position: relative;
   overflow: hidden;
@@ -365,12 +361,11 @@
   .cr-card-featured { border-top: 1px solid var(--border); border-left: 2px solid var(--blue-bright); }
   .cr-portfolio-grid { grid-template-columns: 1fr; }
   .cr-portfolio-main { aspect-ratio: 9 / 16; max-height: 500px; }
-  .cr-photo-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; height: auto; }
+  .cr-photo-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto; height: auto; }
   .cr-photo-item { aspect-ratio: 1 / 1; }
-  .cr-photo-item:first-child { grid-column: 1; grid-row: 1; aspect-ratio: 1 / 1; }
 }
 @media (max-width: 600px) {
-  .cr-photo-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+  .cr-photo-grid { grid-template-columns: repeat(2, 1fr); }
   .cr-hero .hero-photo { object-position: center center; }
   .corner { width: 16px; height: 16px; }
   .corner.tl, .corner.tr { top: 1rem; }

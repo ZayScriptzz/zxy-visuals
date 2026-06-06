@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Portfolio — ZXY Visuals</title>
+<meta name="description" content="Full creator portfolio — portraits, editorial, cinematic photography by ZXY Visuals in Montreal.">
+<meta name="author" content="ZXY Visuals">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#020204">
+<link rel="canonical" href="https://zayscriptzz.github.io/zxy-visuals/creators-portal.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZXY Visuals">
+<meta property="og:title" content="Creator Portfolio — ZXY Visuals">
+<meta property="og:description" content="Full creator portfolio — portraits, editorial, cinematic photography. Montreal-based.">
+<meta property="og:url" content="https://zayscriptzz.github.io/zxy-visuals/creators-portal.html">
+<meta property="og:image" content="https://zayscriptzz.github.io/zxy-visuals/assets/creator-hero.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="creators.css">
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursor-trail"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="ZXY Visuals" class="nav-logo-img">
+  </div>
+  <div class="nav-links">
+    <a href="creators.html" class="nav-back" data-en="&larr; Creator Sessions" data-fr="&larr; Sessions Cr&eacute;ateurs">&larr; Creator Sessions</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">&#127760; FR</button>
+    <a href="creators.html#book" class="nav-cta nav-cta-blue" data-en="Book a Session" data-fr="R&eacute;server">Book a Session</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="creators.html" data-en="Creator Sessions" data-fr="Sessions Cr&eacute;ateurs">Creator Sessions</a>
+  <a href="index.html" data-en="Drone & Aerial" data-fr="Drone & A&eacute;rien">Drone & Aerial</a>
+  <div class="mobile-nav-divider"></div>
+  <a href="creators.html#book" class="mobile-nav-cta blue-cta" data-en="Book a Session" data-fr="R&eacute;server">Book a Session</a>
+</div>
+
+<!-- PORTAL HEADER -->
+<section style="padding: 10rem 4rem 4rem; background: var(--black-2); border-bottom: 1px solid var(--border);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-tag cr-section-tag" data-en="Creator Work" data-fr="Travail cr&eacute;ateur">Creator Work</div>
+    <h2 style="font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem); letter-spacing: 0.02em; line-height: 1; margin-bottom: 1rem;" data-en="Full Portfolio" data-fr="Portfolio Complet">Full Portfolio</h2>
+    <p style="color: var(--white-dim); font-size: 0.92rem;" data-en="Click any image to view full size." data-fr="Cliquez sur une image pour la voir en taille r&eacute;elle.">Click any image to view full size.</p>
+  </div>
+</section>
+
+<!-- PORTAL GRID -->
+<section style="padding: 0 4rem 6rem; background: var(--black-2);">
+  <div class="portal-grid">
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo7.jpg">
+      <img src="assets/creator-photo7.jpg" alt="Portrait">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
+    </div>
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo2.jpg">
+      <img src="assets/creator-photo2.jpg" alt="Street">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Street" data-fr="Rue">Street</div></div>
+    </div>
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo3.jpg">
+      <img src="assets/creator-photo3.jpg" alt="Editorial">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Editorial" data-fr="&Eacute;ditorial">Editorial</div></div>
+    </div>
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo4.jpg">
+      <img src="assets/creator-photo4.jpg" alt="Cinematic">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Cinematic" data-fr="Cin&eacute;matique">Cinematic</div></div>
+    </div>
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo5.jpg">
+      <img src="assets/creator-photo5.jpg" alt="Portrait">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
+    </div>
+
+    <div class="portal-thumb lightbox-trigger" data-type="image" data-src="assets/creator-photo6.jpg">
+      <img src="assets/creator-photo6.jpg" alt="Profile">
+      <div class="portfolio-overlay"><div class="portfolio-label" data-en="Profile" data-fr="Profil">Profile</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BACK + BOOK CTA -->
+<section style="padding: 4rem; background: var(--black); border-top: 1px solid var(--border);">
+  <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center;">
+    <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: 0.02em; line-height: 1;" data-en="Like what you see?" data-fr="Vous aimez ce que vous voyez?">Like what you see?</h2>
+    <p style="color: var(--white-dim); font-size: 0.92rem;" data-en="Book a session and let's create something that stops the scroll." data-fr="R&eacute;servez une session et cr&eacute;ons quelque chose qui arr&ecirc;te le scroll.">Book a session and let's create something that stops the scroll.</p>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+      <a href="creators.html#book" class="btn-primary btn-blue" data-en="Book a Session" data-fr="R&eacute;server une session">Book a Session</a>
+      <a href="creators.html" class="btn-ghost" data-en="Back to Sessions" data-fr="Retour aux sessions">Back to Sessions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg class="footer-axis" id="footerAxis" viewBox="0 0 240 170" width="180" height="128" xmlns="http://www.w3.org/2000/svg" aria-label="ZXY Visuals">
+        <circle class="fa-dot" cx="88" cy="95" r="2.5" fill="rgba(232,232,240,0.6)"/>
+        <line class="fa-line fa-z" x1="88" y1="95" x2="88" y2="15" stroke="#b82020" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-z-label">
+          <polyline points="84,20 88,15 92,20" fill="none" stroke="#b82020" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="93" y="13" fill="#b82020" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2">Z</text>
+          <text x="93" y="25" fill="#b82020" font-family="'Barlow Condensed',sans-serif" font-size="6.5" letter-spacing="1.5" opacity="0.65">45.5017&deg; N</text>
+        </g>
+        <line class="fa-line fa-x" x1="88" y1="95" x2="190" y2="95" stroke="#1a6bbf" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-x-label">
+          <polyline points="185,91 190,95 185,99" fill="none" stroke="#1a6bbf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="194" y="91" fill="#1a6bbf" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2">X</text>
+          <text x="194" y="102" fill="#1a6bbf" font-family="'Barlow Condensed',sans-serif" font-size="6.5" letter-spacing="1.5" opacity="0.65">73.5673&deg; W</text>
+        </g>
+        <line class="fa-line fa-y" x1="88" y1="95" x2="20" y2="130" stroke="rgba(232,232,240,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="fa-label fa-y-label">
+          <polyline points="25,131 20,130 23,126" fill="none" stroke="rgba(232,232,240,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="12" y="143" fill="rgba(232,232,240,0.35)" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="600" letter-spacing="2" text-anchor="middle">Y</text>
+          <text x="12" y="155" fill="rgba(232,232,240,0.35)" font-family="'Barlow Condensed',sans-serif" font-size="9" letter-spacing="1" opacity="0.65" text-anchor="middle">&#x221E;</text>
+        </g>
+        <text class="fa-text-zxy" x="105" y="111" text-anchor="middle">ZXY</text>
+      </svg>
+    </div>
+    <div class="footer-tagline" data-en="Step Into Your Frame. Stand Out." data-fr="Entrez dans votre cadre. D&eacute;marquez-vous.">Step Into Your Frame. Stand Out.</div>
+    <div class="footer-links">
+      <a href="index.html" data-en="Drone & Aerial" data-fr="Drone & A&eacute;rien">Drone & Aerial</a>
+      <a href="https://www.instagram.com/zaypiczz" target="_blank">Instagram</a>
+      <a href="sms:4382826329" data-en="Text Us" data-fr="Nous texter">Text Us</a>
+    </div>
+    <div class="footer-copy" data-en="&copy; 2026 ZXY Visuals. Montreal, QC." data-fr="&copy; 2026 ZXY Visuals. Montr&eacute;al, QC.">&copy; 2026 ZXY Visuals. Montreal, QC.</div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

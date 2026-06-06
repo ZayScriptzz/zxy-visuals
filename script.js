@@ -247,6 +247,52 @@ if (footerAxis) {
   axObs.observe(footerAxis);
 }
 
+// ===== LIGHTBOX =====
+(function() {
+  const lightbox = document.getElementById('lightbox');
+  const content = document.getElementById('lightboxContent');
+  const closeBtn = document.querySelector('.lightbox-close');
+  if (!lightbox || !content) return;
+
+  document.querySelectorAll('.lightbox-trigger').forEach(el => {
+    el.addEventListener('click', () => {
+      const type = el.dataset.type;
+      const src = el.dataset.src;
+      content.innerHTML = '';
+      if (type === 'video') {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        content.appendChild(video);
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        content.appendChild(img);
+      }
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    const video = content.querySelector('video');
+    if (video) video.pause();
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+})();
+
 // ===== DATE PICKER — FUTURE DATES ONLY =====
 const dateInput = document.getElementById('date');
 if (dateInput) {
