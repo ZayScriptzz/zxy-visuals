@@ -287,6 +287,7 @@ if (footerAxis) {
 
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
+    showLbCursor();
   }
 
   function buildDesktopLightbox(originEl) {
@@ -443,6 +444,7 @@ if (footerAxis) {
   }
 
   function closeLightbox() {
+    stopLbCursorHide();
     lightbox.classList.remove('open', 'lb-multi');
     document.body.style.overflow = '';
     var video = mainArea.querySelector('video');
@@ -488,6 +490,37 @@ if (footerAxis) {
     el.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
     });
+  });
+
+  // ===== CURSOR AUTO-HIDE IN LIGHTBOX =====
+  var cursorTimer = null;
+
+  function showLbCursor() {
+    lightbox.classList.remove('lb-cursor-hidden');
+    document.body.classList.remove('lb-cursor-fading');
+    document.body.classList.add('lb-cursor-visible');
+    clearTimeout(cursorTimer);
+    cursorTimer = setTimeout(hideLbCursor, 2000);
+  }
+
+  function hideLbCursor() {
+    document.body.classList.remove('lb-cursor-visible');
+    document.body.classList.add('lb-cursor-fading');
+    setTimeout(function() {
+      if (document.body.classList.contains('lb-cursor-fading')) {
+        lightbox.classList.add('lb-cursor-hidden');
+      }
+    }, 400);
+  }
+
+  function stopLbCursorHide() {
+    clearTimeout(cursorTimer);
+    lightbox.classList.remove('lb-cursor-hidden');
+    document.body.classList.remove('lb-cursor-fading', 'lb-cursor-visible');
+  }
+
+  lightbox.addEventListener('mousemove', function() {
+    if (lightbox.classList.contains('open')) showLbCursor();
   });
 
   // Expose for external use

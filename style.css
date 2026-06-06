@@ -627,6 +627,19 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
   transition: opacity 0.3s ease;
 }
 .lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox.lb-cursor-hidden { cursor: none; }
+.lightbox.lb-cursor-hidden .lightbox-close,
+.lightbox.lb-cursor-hidden .lightbox-prev,
+.lightbox.lb-cursor-hidden .lightbox-next,
+.lightbox.lb-cursor-hidden .lightbox-thumb { cursor: none; }
+body.lb-cursor-fading .cursor,
+body.lb-cursor-fading .cursor-trail {
+  opacity: 0; transition: opacity 400ms ease;
+}
+body.lb-cursor-visible .cursor,
+body.lb-cursor-visible .cursor-trail {
+  opacity: 1; transition: opacity 150ms ease;
+}
 .lightbox-close {
   position: fixed; top: 1.5rem; right: 2rem;
   background: none; border: 1px solid var(--border-hover);
