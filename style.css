@@ -35,7 +35,15 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: none;
+}
+
+/* Hide the native cursor only on pointer devices, and only once JS has
+   booted the custom cursor — keeps a visible cursor if JS ever fails */
+@media (hover: hover) {
+  body.has-custom-cursor { cursor: none; }
+}
+@media (hover: none) {
+  .cursor, .cursor-trail { display: none; }
 }
 
 a { text-decoration: none; color: inherit; }

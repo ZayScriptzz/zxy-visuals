@@ -1,10 +1,10 @@
 // ===== LANGUAGE TOGGLE =====
 let currentLang = 'en';
 
-function toggleLang() {
-  currentLang = currentLang === 'en' ? 'fr' : 'en';
+function applyLang(lang) {
+  currentLang = lang;
   const btn = document.getElementById('langBtn');
-  btn.textContent = currentLang === 'en' ? '🌐 FR' : '🌐 EN';
+  if (btn) btn.textContent = currentLang === 'en' ? '🌐 FR' : '🌐 EN';
 
   // Update all elements with data-en / data-fr
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -29,15 +29,34 @@ function toggleLang() {
     const text = opt.getAttribute('data-' + currentLang);
     if (text) opt.textContent = text;
   });
+  document.querySelectorAll('select optgroup[data-en-label]').forEach(grp => {
+    const label = grp.getAttribute('data-' + currentLang + '-label');
+    if (label) grp.label = label;
+  });
 
   // Update html lang attribute
   document.documentElement.lang = currentLang;
+
+  // Persist across pages
+  try { localStorage.setItem('zxy-lang', currentLang); } catch (e) {}
 }
+
+function toggleLang() {
+  applyLang(currentLang === 'en' ? 'fr' : 'en');
+}
+
+// Restore saved language choice
+try {
+  if (localStorage.getItem('zxy-lang') === 'fr') applyLang('fr');
+} catch (e) {}
 
 // ===== CUSTOM CURSOR =====
 const cursor = document.getElementById('cursor');
 const trail = document.getElementById('cursor-trail');
 let mouseX = 0, mouseY = 0;
+
+// Native cursor is only hidden (via CSS) once this class confirms JS is running
+document.body.classList.add('has-custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
@@ -128,6 +147,21 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       window.scrollTo({ top, behavior: 'smooth' });
     }
   });
+});
+
+// ===== PORTFOLIO VIDEOS — PLAY ONLY WHEN VISIBLE =====
+// Videos use preload="none" + poster, so nothing downloads until scrolled into view
+document.querySelectorAll('video.portfolio-video').forEach(video => {
+  const vidObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: '120px' });
+  vidObs.observe(video);
 });
 
 // ===== REVIEW CAROUSEL =====
@@ -472,10 +506,15 @@ if (footerAxis) {
 
   // Single-image triggers (creators.html, index.html portfolio items)
   document.querySelectorAll('.lightbox-trigger').forEach(function(el) {
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
     el.addEventListener('click', function() {
       var type = el.dataset.type || 'image';
       var src = el.dataset.src;
       openLightbox([{ src: src, type: type, alt: '' }], 0, el.querySelector('img') || el);
+    });
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
     });
   });
 
@@ -593,7 +632,9 @@ const dateInput = document.getElementById('date');
 if (dateInput) {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  dateInput.min = tomorrow.toISOString().split('T')[0];
+  // Build the date string in local time — toISOString() is UTC and can be off by a day
+  const pad = n => String(n).padStart(2, '0');
+  dateInput.min = tomorrow.getFullYear() + '-' + pad(tomorrow.getMonth() + 1) + '-' + pad(tomorrow.getDate());
 }
 
 // ===== FORM VALIDATION + SUBMIT FEEDBACK =====

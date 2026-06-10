@@ -64,7 +64,7 @@
 <!-- HERO -->
 <section class="hero cr-hero" id="hero">
   <div class="hero-bg">
-    <img src="assets/creator-hero.jpg" alt="" class="hero-photo">
+    <img src="assets/creator-hero.jpg" alt="" class="hero-photo" width="1080" height="1920" fetchpriority="high">
     <div class="hero-overlay cr-overlay"></div>
     <div class="corner tl"></div>
     <div class="corner tr"></div>
@@ -290,7 +290,7 @@
   <div class="cr-portfolio-grid">
     <!-- Vertical reel -->
     <div class="portfolio-item cr-portfolio-main lightbox-trigger" data-type="video" data-src="assets/creator-reel.mp4">
-      <video autoplay muted loop playsinline class="portfolio-video">
+      <video muted loop playsinline preload="none" poster="assets/creator-reel-poster.jpg" class="portfolio-video">
         <source src="assets/creator-reel.mp4" type="video/mp4">
       </video>
       <div class="portfolio-overlay">
@@ -300,19 +300,19 @@
     <!-- Photo grid -->
     <div class="cr-photo-grid">
       <div class="cr-photo-item lightbox-trigger" data-type="image" data-src="assets/creator-photo2.jpg">
-        <img src="assets/creator-photo2.jpg" alt="Street portrait" class="cr-photo">
+        <img src="assets/creator-photo2.jpg" alt="Street portrait" class="cr-photo" loading="lazy" width="1080" height="1920">
         <div class="portfolio-overlay"><div class="portfolio-label" data-en="Street" data-fr="Rue">Street</div></div>
       </div>
       <div class="cr-photo-item lightbox-trigger" data-type="image" data-src="assets/creator-photo3.jpg">
-        <img src="assets/creator-photo3.jpg" alt="Editorial portrait" class="cr-photo">
+        <img src="assets/creator-photo3.jpg" alt="Editorial portrait" class="cr-photo" loading="lazy" width="1080" height="1920">
         <div class="portfolio-overlay"><div class="portfolio-label" data-en="Editorial" data-fr="Éditorial">Editorial</div></div>
       </div>
       <div class="cr-photo-item lightbox-trigger" data-type="image" data-src="assets/creator-photo4.jpg">
-        <img src="assets/creator-photo4.jpg" alt="Cinematic portrait" class="cr-photo">
+        <img src="assets/creator-photo4.jpg" alt="Cinematic portrait" class="cr-photo" loading="lazy" width="1080" height="1920">
         <div class="portfolio-overlay"><div class="portfolio-label" data-en="Cinematic" data-fr="Cinématique">Cinematic</div></div>
       </div>
       <div class="cr-photo-item lightbox-trigger" data-type="image" data-src="assets/creator-photo7.jpg">
-        <img src="assets/creator-photo7.jpg" alt="Portrait" class="cr-photo">
+        <img src="assets/creator-photo7.jpg" alt="Portrait" class="cr-photo" loading="lazy" width="1080" height="1920">
         <div class="portfolio-overlay"><div class="portfolio-label" data-en="Portrait" data-fr="Portrait">Portrait</div></div>
       </div>
     </div>
@@ -346,6 +346,7 @@
       <form class="reviews-form" id="reviewForm" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="New Review — ZXY Visuals Creator Sessions">
         <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://zayscriptzz.github.io/zxy-visuals/thanks.html">
         <div class="form-row">
@@ -394,6 +395,7 @@
     <form class="booking-form" id="bookingForm" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New Creator Session Request — ZXY Visuals">
       <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" value="https://zayscriptzz.github.io/zxy-visuals/thanks.html">
 
