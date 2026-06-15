@@ -37,6 +37,18 @@ function applyLang(lang) {
   // Update html lang attribute
   document.documentElement.lang = currentLang;
 
+  // Keep the URL in sync so the current view is shareable:
+  // English = clean URL, French = ?lang=fr
+  try {
+    const url = new URL(window.location.href);
+    if (currentLang === 'fr') {
+      url.searchParams.set('lang', 'fr');
+    } else {
+      url.searchParams.delete('lang');
+    }
+    window.history.replaceState(null, '', url);
+  } catch (e) {}
+
   // Persist across pages
   try { localStorage.setItem('zxy-lang', currentLang); } catch (e) {}
 }
@@ -45,9 +57,14 @@ function toggleLang() {
   applyLang(currentLang === 'en' ? 'fr' : 'en');
 }
 
-// Restore saved language choice
+// Decide initial language: URL ?lang= wins, then saved choice, else English
 try {
-  if (localStorage.getItem('zxy-lang') === 'fr') applyLang('fr');
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  if (urlLang === 'fr' || urlLang === 'en') {
+    applyLang(urlLang);
+  } else if (localStorage.getItem('zxy-lang') === 'fr') {
+    applyLang('fr');
+  }
 } catch (e) {}
 
 // ===== CUSTOM CURSOR =====
