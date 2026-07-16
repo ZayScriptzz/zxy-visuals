@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZXY. — Websites | Build Your Frame, Together</title>
+<meta name="description" content="ZXY Visuals — Bilingual websites for Montreal businesses. Built in a week. Yours.">
+<meta name="theme-color" content="#020204">
+<!-- social cards (og:image path is deploy-relative — see docs/launch-runbook.md) -->
+<meta property="og:title" content="ZXY. — Websites | Bilingual sites for Montréal businesses">
+<meta property="og:description" content="Built in a week. Both languages. Yours — no retainer. Free preview first.">
+<meta property="og:image" content="https://zxyframe.ca/websites/assets/skyline-downtown.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zxyframe.ca/websites/">
+<meta property="og:locale" content="en_CA">
+<meta property="og:locale:alternate" content="fr_CA">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="websites.css?v=44"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<!-- the hero mockup's photo is a CSS background — preload it at the right size so the hero paints complete -->
+<link rel="preload" as="image" href="assets/dusk-street.jpg" media="(min-width: 821px)">
+<link rel="preload" as="image" href="assets/dusk-street-sm.jpg" media="(max-width: 820px)">
+
+<!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
+<script type="importmap">
+{
+  "imports": {
+    "webgl-fluid-enhanced": "https://esm.sh/webgl-fluid-enhanced@0.6.1"
+  }
+}
+</script>
+</head>
+<body>
+<div class="websites-page">
+
+  <!-- ===== LIVE WEBGL FLUID CANVAS ===== -->
+  <canvas id="fluid-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===== STATIC FALLBACK BLOOM (reduced-motion / mobile / no-WebGL) ===== -->
+  <div class="hero-fallback" aria-hidden="true">
+    <div class="bloom red-main"></div>
+    <div class="bloom red-low"></div>
+    <div class="bloom blue-main"></div>
+    <div class="bloom blue-low"></div>
+    <div class="bloom purple-mid"></div>
+    <div class="hero-wash red"></div>
+    <div class="hero-wash blue"></div>
+  </div>
+
+  <!-- ===== VIGNETTE + TEXT SCRIM ===== -->
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <!-- ===== FLOATING CONTRACTOR MOCKUP (proof asset) ===== -->
+  <div class="hero-mockup" aria-hidden="true">
+    <div class="mockup-chrome">
+      <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+      <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>borealreno.ca</div></div>
+      <div class="spacer"></div>
+    </div>
+    <div class="mockup-site">
+      <div class="bg boreal-scene boreal-photo"></div>
+      <div class="overlay"></div>
+      <div class="mockup-nav">
+        <div class="mockup-brand">BORÉAL<span class="dot">.</span></div>
+        <div class="mockup-navlinks">
+          <span data-i18n="mockNavA">SERVICES</span><span data-i18n="mockNavB">PROJECTS</span>
+          <span class="quote" data-i18n="mockBtn">GET A QUOTE</span>
+        </div>
+      </div>
+      <div class="mockup-hud"><span class="dot"></span><span data-i18n="mockTag">YOUR DRONE FOOTAGE</span></div>
+      <div class="mockup-copy">
+        <div class="mockup-eyebrow">— <span data-i18n="mockEyebrow">MONTRÉAL — RENOVATION · SINCE 2014</span></div>
+        <div class="mockup-h1"><span data-i18n="mockH1">BUILT</span> <span class="grad" data-i18n="mockH2">TO LAST.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CORNER BRACKETS ===== -->
+  <div class="corner tl" aria-hidden="true"></div>
+  <div class="corner tr" aria-hidden="true"></div>
+  <div class="corner bl" aria-hidden="true"></div>
+  <div class="corner br" aria-hidden="true"></div>
+
+  <!-- ===== RETICLE ===== -->
+  <div class="reticle" aria-hidden="true"><div class="core"></div><div class="ring"></div></div>
+
+  <!-- ===== NAV — fixed top bar: transparent (scrim) over hero, solid black on scroll ===== -->
+  <nav class="hero-nav" id="hero-nav">
+    <div class="brand">
+      <!-- absolute URL: local python server has no site root (bare "/" = directory listing) -->
+      <a href="https://zxyframe.ca/" class="hero-logo">ZXY<span class="accent-dot">.</span></a>
+      <div class="hero-section-tag">/WEBSITES</div>
+    </div>
+    <div class="links">
+      <a href="https://zxyframe.ca/" class="btn-home" data-i18n="navHome">HOME</a>
+      <div class="menu">
+        <a href="#why" data-i18n="navWhy">WHY</a><a href="#examples" data-i18n="navExamples">EXAMPLES</a><a href="#pricing" data-i18n="navPricing">PRICING</a>
+      </div>
+      <button class="btn-lang" id="lang-toggle" type="button"><span class="dot"></span><span data-i18n="langCode">FR</span></button>
+      <a href="#preview" class="btn-nav-cta" data-i18n="navCta">FREE PREVIEW</a>
+      <!-- mobile disclosure nav (≤820px) — zero-JS <details>; JS only closes it on tap -->
+      <details class="nav-mobile" id="nav-mobile">
+        <summary><span data-i18n="navMenu">MENU</span></summary>
+        <div class="nav-mobile-panel">
+          <a href="#why" data-i18n="navWhy">WHY</a>
+          <a href="#examples" data-i18n="navExamples">EXAMPLES</a>
+          <a href="#pricing" data-i18n="navPricing">PRICING</a>
+          <a href="#preview" class="cta" data-i18n="navCta">FREE PREVIEW</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="hero-content">
+
+    <!-- HEADLINE -->
+    <div class="hero-headline-block">
+      <div class="hero-eyebrow">— <span data-i18n="eyebrow">MONTRÉAL — WEBSITES · BILINGUAL · BILL 96</span></div>
+      <h1 class="hero-headline">
+        <span data-i18n="l1">BUILD YOUR</span>
+        <span class="hl-frameline"><span data-i18n="l2pre"></span><span class="framed-word"><span class="fw-specular" aria-hidden="true"></span><span class="framed-word-text" data-i18n="l2frame">FRAME</span></span><span data-i18n="l2post"></span></span>
+        <span data-i18n="l3">TOGETHER.</span>
+      </h1>
+      <p class="hero-tagline" data-i18n="sub1">Bilingual. Built in a week. Yours.</p>
+      <div class="hero-cta-row">
+        <a href="#preview" class="btn-primary"><span data-i18n="cta1">GET A FREE PREVIEW</span> <span class="arrow">→</span></a>
+        <a href="#examples" class="btn-secondary" data-i18n="cta2">SEE EXAMPLE BUILDS</a>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="hero-bottom">
+      <div class="left">
+        <div class="scroll-label"><span class="blink" data-i18n="scroll">SCROLL</span><span class="line"></span></div>
+      </div>
+      <!-- AXES MARK (replaces FLUID · LIVE) — red-Z / blue-X / grey-Y, draw-in once on load then static -->
+      <div class="hero-cornermark">
+        <svg class="axis-glyph" id="axisGlyph" viewBox="0 0 150 120" width="118" height="94" xmlns="http://www.w3.org/2000/svg" aria-label="ZXY axes">
+          <circle class="ax-dot" cx="60" cy="78" r="2.4" fill="rgba(255,255,255,.7)"/>
+          <line class="ax-line ax-z" x1="60" y1="78" x2="60" y2="14" stroke="#ff4438" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-z-label" x="66" y="17" fill="#ff4438">Z</text>
+          <line class="ax-line ax-x" x1="60" y1="78" x2="138" y2="78" stroke="#2b7fd4" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-x-label" x="140" y="82" fill="#2b7fd4">X</text>
+          <line class="ax-line ax-y" x1="60" y1="78" x2="16" y2="104" stroke="rgba(255,255,255,.42)" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-y-label" x="6" y="114" fill="rgba(255,255,255,.42)">Y</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== PAGE SECTIONS =====================================================
+     Body-level siblings AFTER .websites-page (it has overflow:hidden and would
+     clip children). Opaque backgrounds cover the fixed z0 fluid canvas.
+     Stubs now; content lands per phase (P4-P8). -->
+<!-- Each section's backdrop demos a WEBSITE STYLE ZXY builds (Zay's direction:
+     the page is the portfolio). The style-demo class paints the backdrop; the
+     .style-chip names it like a spec label. -->
+<main id="page-sections">
+  <section id="why" class="page-section style-warm" aria-labelledby="why-title">
+    <p class="section-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot red"></span><span data-i18n="styleWhy">STYLE — WARM</span></span>
+    <h2 class="section-title" id="why-title" data-reveal><span data-i18n="whyTitleA">No site, no </span><span class="why-hl" data-i18n="whyTitleHl">leads.</span></h2>
+    <div class="why-grid">
+      <article class="why-card" data-reveal style="--i: 0">
+        <span class="atag"><span class="adot red"></span><span data-i18n="whyCard1Tag">BILINGUAL</span></span>
+        <h3 data-i18n="whyCard1Title">Both languages. Hand-written.</h3>
+        <p data-i18n="whyCard1Body">No translate button. Real French and real English on every page, so Loi 96 is covered and customers find you in both languages.</p>
+        <button type="button" class="toggle-proof" id="toggle-proof" data-i18n="whyToggleProof">Press FR. That's the product. →</button>
+      </article>
+      <article class="why-card" data-reveal style="--i: 1">
+        <span class="atag"><span class="adot purple"></span><span data-i18n="whyCard2Tag">YOURS</span></span>
+        <h3 data-i18n="whyCard2Title">You own every piece.</h3>
+        <p data-i18n="whyCard2Body">Domain, files, hosting: all in your name. Nobody holds your site hostage for a monthly fee.</p>
+      </article>
+      <article class="why-card" data-reveal style="--i: 2">
+        <span class="atag"><span class="adot blue"></span><span data-i18n="whyCard3Tag">IN A WEEK</span></span>
+        <h3 data-i18n="whyCard3Title">Live in seven days.</h3>
+        <p data-i18n="whyCard3Body">From the first call to the keys, mapped day by day.</p>
+        <a class="why-link" href="#process" data-i18n="whyCard3Link">THE PROCESS →</a>
+      </article>
+    </div>
+    <!-- R1.1: editorial footer split — words left, the photograph right, whole cup -->
+    <div class="why-foot">
+      <div class="why-foot-copy">
+        <p class="why-moat" data-reveal data-i18n="whyMoat">No photos? We fly drones for a living. Your footage is the add-on, not your homework.</p>
+        <div class="why-stats" data-reveal>
+          <div class="stat"><span class="stat-n">2</span><span class="stat-l" data-i18n="stat1l">LANGUAGES</span></div>
+          <div class="stat"><span class="stat-n">7</span><span class="stat-l" data-i18n="stat2l">DAYS</span></div>
+          <div class="stat"><span class="stat-n">100%</span><span class="stat-l" data-i18n="stat3l">YOURS</span></div>
+        </div>
+      </div>
+      <figure class="why-figure" data-reveal>
+        <img src="assets/espresso.jpg"
+             srcset="assets/espresso-sm.jpg 800w, assets/espresso.jpg 1400w"
+             sizes="(max-width: 820px) 100vw, 42vw"
+             loading="lazy" decoding="async" width="1400" height="934"
+             alt="Espresso pour at a Montréal café — shot by ZXY" data-i18n-attrs="alt=altEspresso">
+      </figure>
+    </div>
+  </section>
+  <section id="examples" class="page-section style-gallery" aria-labelledby="examples-title">
+    <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleExamples">STYLE — EDITORIAL</span></span>
+    <!-- JLM-style brutalist frame: the wrapper and the rail paint INK through
+         2px gaps; every child paints cream — the grid lines are never drawn -->
+    <div class="jlm-frame">
+      <div class="jlm-panel">
+        <div class="jlm-panel-in">
+          <h2 class="section-title" id="examples-title" data-reveal>
+            <span class="jlm-line" data-i18n="exTitleL1">THE</span>
+            <span class="jlm-line" data-i18n="exTitleL2">FRAME</span>
+            <span class="jlm-line" data-i18n="exTitleL3">GALLERY.</span>
+          </h2>
+          <p class="gallery-sub" data-reveal data-i18n="examplesSub">No fake clients. Concept builds and our own sites, labeled as exactly that.</p>
+          <div class="jlm-swatches" aria-hidden="true"><span class="sw red"></span><span class="sw blue"></span><span class="sw purple"></span></div>
+        </div>
+      </div>
+    <div class="gallery-grid">
+      <!-- 1 · Boréal — the CSS-composed concept build (domain doesn't resolve: honesty is the pitch) -->
+      <article class="build-card" data-reveal style="--i: 0">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>borealreno.ca</div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot boreal-scene boreal-photo lens-host" id="lens-host" role="img" tabindex="0"
+             aria-label="Dusk over a Montréal street — the Boréal concept hero, shown in both languages" data-i18n-attrs="aria-label=altDusk">
+          <div class="bshot-copy">
+            <span class="bshot-brand">BORÉAL<span>.</span></span>
+            <span class="bshot-h1"><span data-i18n="mockH1">BUILT</span> <em data-i18n="mockH2">TO LAST.</em></span>
+          </div>
+          <!-- X-RAY LENS: the OTHER language lives on this layer, revealed
+               through a reticle that follows the pointer (tap-to-flip on touch) -->
+          <div class="lens-layer boreal-scene boreal-photo" aria-hidden="true">
+            <div class="bshot-copy">
+              <span class="bshot-brand">BORÉAL<span>.</span></span>
+              <span class="bshot-h1 alt-h1" data-en="BUILT TO LAST." data-fr="BÂTI POUR DURER.">BÂTI POUR DURER.</span>
+            </div>
+            <span class="lens-chip" id="lens-chip">FR — LIVE</span>
+          </div>
+          <div class="lens-ring" aria-hidden="true"></div>
+          <span class="bshot-mark" data-i18n="markBoreal">LIVE — CONCEPT</span>
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot red"></span><span data-i18n="tileBorealTag">CONTRACTOR</span></span>
+          <h3 data-i18n="tileBorealName">Boréal — Renovation</h3>
+          <span class="build-badge" data-i18n="badgeConcept">CONCEPT — DEMO</span>
+        </div>
+      </article>
+      <!-- 2 · the real ZXY real-estate frame — TEMPLATE: THE MATTE (framed print) -->
+      <article class="build-card tile-matte" data-reveal style="--i: 1">
+        <div class="matte-frame">
+          <img src="assets/zxy-realtor-hero.jpg"
+               srcset="assets/zxy-realtor-hero-sm.jpg 800w, assets/zxy-realtor-hero.jpg 1200w"
+               sizes="(max-width: 820px) 100vw, 58vw"
+               loading="lazy" decoding="async" width="1200" height="644"
+               alt="ZXY real-estate site hero" data-i18n-attrs="alt=altRealtor">
+          <span class="matte-mark" data-i18n="markMatte">№ 01 — MTL</span>
+        </div>
+        <div class="matte-caption">
+          <h3 data-i18n="tileRealtorName">ZXY — Property Media</h3>
+          <p class="matte-sub"><span data-i18n="tileRealtorTag">REAL ESTATE</span><span class="sep" aria-hidden="true">·</span><span data-i18n="badgeOwn">OUR OWN FRAME</span></p>
+        </div>
+      </article>
+      <!-- 3 · the real ZXY creators frame — TEMPLATE: THE CINEMA (title card) -->
+      <article class="build-card tile-cinema" data-reveal style="--i: 2">
+        <div class="cinema-shot">
+          <img src="assets/zxy-creator-hero.jpg"
+               srcset="assets/zxy-creator-hero-sm.jpg 800w, assets/zxy-creator-hero.jpg 1200w"
+               sizes="(max-width: 820px) 100vw, 58vw"
+               loading="lazy" decoding="async" width="1200" height="644"
+               alt="ZXY creator sessions site hero" data-i18n-attrs="alt=altCreator">
+          <div class="cinema-scrim" aria-hidden="true"></div>
+          <span class="cinema-mark" data-i18n="markCinema">ZXY — SESSION 02</span>
+          <div class="cinema-caption">
+            <span class="atag"><span class="adot blue"></span><span data-i18n="tileCreatorTag">CREATORS</span></span>
+            <h3 data-i18n="tileCreatorName">ZXY — Creator Sessions</h3>
+            <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+          </div>
+        </div>
+      </article>
+      <!-- 4 · the aerial frame — TEMPLATE: THE POSTER (full portrait, as shot) -->
+      <article class="build-card tile-poster" data-reveal style="--i: 3">
+        <img class="poster-img" src="assets/fireworks-bridge.jpg"
+             srcset="assets/fireworks-bridge-sm.jpg 800w, assets/fireworks-bridge.jpg 1200w"
+             sizes="(max-width: 820px) 100vw, 58vw"
+             loading="lazy" decoding="async" width="1200" height="1800"
+             alt="Fireworks over the Jacques-Cartier bridge — ZXY drone media" data-i18n-attrs="alt=altAerial">
+        <div class="poster-type">
+          <span class="poster-eyebrow" data-i18n="posterDate">MONTRÉAL — JULY 10</span>
+          <span class="poster-no" data-i18n="posterNo">SHOT № 58</span>
+          <span class="poster-square" aria-hidden="true"></span>
+        </div>
+      </article>
+      <!-- 5 · "Brume" café concept — TEMPLATE: THE WARM CARD (honestly labeled) -->
+      <article class="build-card tile-warmcard" data-reveal style="--i: 4">
+        <div class="warmcard-photo">
+          <img src="assets/cafe-booth.jpg"
+               srcset="assets/cafe-booth-sm.jpg 800w, assets/cafe-booth.jpg 1200w"
+               sizes="(max-width: 820px) 100vw, 58vw"
+               loading="lazy" decoding="async" width="1200" height="1800"
+               alt="Café table with espresso and mural — the Brume café concept" data-i18n-attrs="alt=altCafe">
+          <span class="warmcard-mark" data-i18n="markCafe">Brume, Mile End</span>
+        </div>
+        <div class="warmcard-caption">
+          <span class="warmcard-eyebrow" data-i18n="tileCafeTag">CAFÉ</span>
+          <h3 data-i18n="tileCafeName">Brume — Café</h3>
+          <span class="build-badge" data-i18n="badgeConcept">CONCEPT — DEMO</span>
+        </div>
+      </article>
+      <!-- 6 · the Empty Frame — the honesty gap converted into the CTA -->
+      <a class="build-card empty-frame" href="#preview" data-reveal style="--i: 5">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span><span data-i18n="emptyUrl">yourbusiness.ca</span></div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot empty">
+          <span class="empty-plus" aria-hidden="true">+</span>
+          <span class="empty-line" data-i18n="tileEmptyLine">YOUR BUSINESS — NEXT</span>
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot purple"></span><span data-i18n="tileEmptyTag">NEXT</span></span>
+          <h3 data-i18n="tileEmptyCta">YOUR FRAME GOES HERE →</h3>
+        </div>
+      </a>
+    </div>
+    </div><!-- /jlm-frame -->
+  </section>
+  <section id="process" class="page-section style-blueprint" aria-labelledby="process-title">
+    <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleProcess">STYLE — BLUEPRINT</span></span>
+    <h2 class="section-title" id="process-title" data-reveal data-i18n="processTitle">ONE WEEK. HERE'S HOW.</h2>
+    <p class="proc-sub" data-reveal data-i18n="processSub">The week, station by station. Every build runs the same one.</p>
+    <div class="proc-wrap" data-reveal>
+      <svg class="proc-rail" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <!-- userSpaceOnUse: objectBoundingBox gradients fail on axis-aligned
+               lines (zero-height bbox = nothing painted) -->
+          <linearGradient id="procGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+            <stop offset="0" stop-color="#ff4438"/>
+            <stop offset=".5" stop-color="#9166e8"/>
+            <stop offset="1" stop-color="#2b7fd4"/>
+          </linearGradient>
+        </defs>
+        <line class="proc-track" x1="0" y1="2" x2="1000" y2="2" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+        <line class="proc-line" x1="0" y1="2" x2="1000" y2="2" stroke="url(#procGrad)" stroke-width="3" pathLength="100"/>
+      </svg>
+      <div class="proc-carriage" aria-hidden="true"></div>
+      <ol class="proc-steps">
+        <li class="proc-step" style="--i: 0">
+          <span class="proc-day" data-i18n="procD1">D1</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT1">THE CALL</h3><p data-i18n="procB1">Everything we need, in one conversation.</p>
+        </li>
+        <li class="proc-step" style="--i: 1">
+          <span class="proc-day" data-i18n="procD2">D2</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT2">THE DRAFT</h3><p data-i18n="procB2">Structure and copy, in both languages.</p>
+        </li>
+        <li class="proc-step" style="--i: 2">
+          <span class="proc-day" data-i18n="procD3">D3–4</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT3">THE BUILD</h3><p data-i18n="procB3">The full site goes up on a private preview link.</p>
+        </li>
+        <li class="proc-step" style="--i: 3">
+          <span class="proc-day" data-i18n="procD4">D5</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT4">YOUR PASS</h3><p data-i18n="procB4">One review. Mark everything.</p>
+        </li>
+        <li class="proc-step" style="--i: 4">
+          <span class="proc-day" data-i18n="procD5">D6</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT5">THE FIX</h3><p data-i18n="procB5">Every note closed.</p>
+        </li>
+        <li class="proc-step" style="--i: 5">
+          <span class="proc-day" data-i18n="procD6">D7</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT6">HANDOFF</h3><p data-i18n="procB6">Live. Owned. Yours.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <!-- ===== #AERIAL — THE DUSK BAND ==========================================
+       The moat, made visible: Zay's graded clip0022 (rooftops tilt into a
+       burning sunset) loops silently behind one line. Plays only on-screen —
+       INCLUDING phones (Equal Cut: 720p rendition + small poster swap in
+       site.js). Poster-only remains for reduced-motion / data-saver /
+       tier-down. Markup ships the small poster; desktop swaps UP. The poster
+       is the clip's own first frame, so playback starts without a jump. -->
+  <section id="aerial" class="page-section style-band" aria-labelledby="aerial-line">
+    <video class="band-video" id="band-video" muted loop playsinline preload="none"
+           poster="assets/aerial-poster-sm.jpg" width="1920" height="1080" aria-hidden="true">
+      <source src="assets/aerial-reveal.mp4" type="video/mp4">
+    </video>
+    <div class="band-scrim" aria-hidden="true"></div>
+    <p class="section-chapter"><span data-i18n="chAerial">— AERIAL</span></p>
+    <div class="band-inner">
+      <p class="band-line" id="aerial-line" data-reveal data-i18n="bandLine">We fly drones for a living.</p>
+    </div>
+  </section>
+  <section id="pricing" class="page-section style-minimal" aria-labelledby="pricing-title">
+    <p class="section-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePricing">STYLE — STATEMENT</span></span>
+    <h2 class="section-title" id="pricing-title" data-reveal><span data-i18n="pricingT1">Real prices. Starting at </span><em class="pricing-zero" data-i18n="pricingT0">$0.</em></h2>
+    <p class="pricing-sub" data-reveal><span data-i18n="pricingSub">One build, no retainer. Hosting is optional and the preview costs nothing.</span></p>
+    <a class="tier-zero" href="#preview" data-reveal>
+      <span class="tz-price" data-i18n="tzPrice">$0</span>
+      <span class="tz-copy">
+        <strong data-i18n="tzTitle">THE PREVIEW</strong>
+        <span data-i18n="tzBody">Price your build after you've seen it.</span>
+      </span>
+      <span class="tz-arrow" aria-hidden="true">→</span>
+    </a>
+    <div class="tier-grid">
+      <article class="tier-card" data-reveal style="--i: 0">
+        <h3 data-i18n="tier1Name">THE SITE</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num" data-i18n="tier1Price">$797</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier1a">The full site, built for you</li>
+          <li data-i18n="tierBoth">Both languages</li>
+          <li data-i18n="tierWeek">Live in a week</li>
+        </ul>
+      </article>
+      <article class="tier-card" data-reveal style="--i: 1">
+        <h3 data-i18n="tier2Name">HOSTING + UPDATES</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num" data-i18n="tier2Price">$59/mo</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier2a">First month included</li>
+          <li data-i18n="tierBoth2">Updates handled for you</li>
+          <li data-i18n="tierWeek2">Members: 25% off one shoot a year</li>
+        </ul>
+      </article>
+      <article class="tier-card" data-reveal style="--i: 2">
+        <span class="tier-pop" data-i18n="tierPop">BEST VALUE</span>
+        <h3 data-i18n="tier3Name">SITE + SHOOT</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num" data-i18n="tier3Price">from $897</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier3a">Site + drone/photo day</li>
+          <li data-i18n="tierBoth3">24-hour media delivery</li>
+          <li data-i18n="tierWeek3">Both languages</li>
+        </ul>
+      </article>
+    </div>
+    <p class="tier-includes" data-reveal><strong data-i18n="inclLabel">EVERY BUILD INCLUDES</strong><span data-i18n="inclList">Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build, you own it.</span></p>
+  </section>
+  <section id="preview" class="page-section style-cinematic" aria-labelledby="preview-title">
+    <p class="section-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePreview">STYLE — SPOTLIGHT</span></span>
+    <div class="preview-chips" data-reveal>
+      <span class="p-chip" data-i18n="prevChip1">$0 PREVIEW</span>
+      <span class="p-chip" data-i18n="prevChip2">NO DEPOSIT</span>
+      <span class="p-chip" data-i18n="prevChip3">NO MEETING</span>
+    </div>
+    <h2 class="section-title" id="preview-title" data-reveal data-i18n="previewTitle">YOUR SITE, BUILT FIRST. FREE.</h2>
+    <p class="preview-sub" data-reveal data-i18n="previewSub">We build a working preview of your site. You look at it. Then we talk.</p>
+    <div class="preview-grid">
+      <!-- FormSubmit: same endpoint as the live main site. UNTESTED IN PROD from
+           this page — first real submission triggers FormSubmit's one-time
+           activation email (deploy-day checklist item). -->
+      <form class="preview-form" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST" data-reveal>
+        <input type="hidden" name="_subject" value="ZXY — Free website preview request">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field">
+          <label for="f-business" data-i18n="formBusiness">BUSINESS NAME</label>
+          <input id="f-business" name="business" type="text" required autocomplete="organization" placeholder="e.g. Boréal Rénovation" data-i18n-attrs="placeholder=formBusinessPh">
+        </div>
+        <div class="field">
+          <label for="f-name" data-i18n="formName">YOUR NAME</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-phone" data-i18n="formPhone">PHONE</label>
+          <input id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="f-trade" data-i18n="formTrade">YOUR TRADE</label>
+          <select id="f-trade" name="trade" required>
+            <option value="" data-i18n="tradePick">Choose…</option>
+            <option value="contractor" data-i18n="tradeContractor">Contractor / Renovation</option>
+            <option value="realtor" data-i18n="tradeRealtor">Realtor</option>
+            <option value="creator" data-i18n="tradeCreator">Creator</option>
+            <option value="other" data-i18n="tradeOther">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-trade-detail"><span data-i18n="formTradeDetail">WHAT DO YOU DO?</span> <em class="opt" id="f-trade-detail-opt" data-i18n="formOptional">(OPTIONAL)</em></label>
+          <input id="f-trade-detail" name="trade_detail" type="text" maxlength="40" placeholder="e.g. Landscaping, plumbing, café…" data-i18n-attrs="placeholder=formTradeDetailPh">
+        </div>
+        <button class="btn-primary form-submit" type="submit"><span data-i18n="formSubmit">GET MY FREE PREVIEW</span> <span class="arrow">→</span></button>
+        <!-- Response-time promise — Zay's operational call; enable when ready:
+        <p class="form-note" data-i18n="resp48">We reply within 48 hours. / On répond en 48 heures.</p> -->
+      </form>
+      <aside class="preview-aside" data-reveal>
+        <!-- THE PREVIEW FORGE — the form builds the visitor's own site while they
+             type. aria-hidden mirror; the form stays the accessible object. -->
+        <div class="forge" id="forge" data-trade="" aria-hidden="true">
+          <div class="mockup-chrome">
+            <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span><span id="forge-url" data-i18n="forgeUrlDefault">yoursite.ca</span></div></div>
+            <div class="spacer"></div>
+          </div>
+          <div class="forge-site">
+            <div class="forge-nav">
+              <span class="forge-brand" id="forge-brand" data-i18n="forgeBrand">YOUR BUSINESS</span>
+              <span class="forge-cta" data-i18n="mockBtn">GET A QUOTE</span>
+            </div>
+            <div class="forge-copy">
+              <span class="forge-eyebrow" id="forge-eyebrow" data-i18n="forgeEyebrow">MONTRÉAL — YOUR TRADE</span>
+              <span class="forge-h1" id="forge-h1" data-i18n="forgeDefault">YOUR BUSINESS, FRAMED.</span>
+            </div>
+          </div>
+        </div>
+        <p class="forge-hud"><span class="adot purple"></span><span data-i18n="forgeHud">THIS IS THE PREVIEW WE BUILD</span></p>
+        <p class="aside-label" data-i18n="orText">— OR —</p>
+        <a class="contact-chip" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot red"></span><span data-i18n="smsChip">TEXT US</span><span class="chip-num">514 260-4573</span></a>
+        <a class="contact-chip" href="tel:5142604573"><span class="adot blue"></span><span data-i18n="callChip">CALL</span><span class="chip-num">514 260-4573</span></a>
+        <p class="aside-note" data-i18n="asideNote">Straight to us. No call centre.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <p class="section-chapter"><span data-i18n="chFooter">ZXY — MONTRÉAL</span></p>
+  <div class="footer-grid">
+    <p class="footer-line" data-i18n="footPitch">Bilingual websites for Montréal businesses. Built in a week. Yours.</p>
+    <p class="footer-contact">
+      <a href="sms:5142604573">514 260-4573</a><span class="sep"> · </span><a href="mailto:zxypiczz@gmail.com">zxypiczz@gmail.com</a><span class="sep"> · </span><a href="https://zxyframe.ca/">zxyframe.ca</a>
+    </p>
+    <p class="footer-legal" data-i18n="footMade">Designed and hosted in Montréal.</p>
+  </div>
+</footer>
+
+<!-- Sticky mobile SMS pill — appears after the hero exits, hides at #preview (site.js) -->
+<a class="sms-pill" id="sms-pill" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot"></span><span data-i18n="pillText">TEXT US — FREE PREVIEW</span></a>
+
+<!-- Telemetry: progress hairline (site.js drives it) -->
+<div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
+
+<!-- EN/FR toggle (ported from the design's bilingual component) -->
+<script>
+(function () {
+  var I18N = {
+    en: {
+      langCode: 'FR', navHome: 'HOME', navWhy: 'WHY', navExamples: 'EXAMPLES', navPricing: 'PRICING', navCta: 'FREE PREVIEW',
+      eyebrow: 'MONTRÉAL — WEBSITES · BILINGUAL · BILL 96',
+      l1: 'BUILD YOUR', l2pre: '', l2frame: 'FRAME', l2post: '', l3: 'TOGETHER.',
+      sub1: 'Bilingual. Built in a week. Yours.',
+      cta1: 'GET A FREE PREVIEW', cta2: 'SEE EXAMPLE BUILDS',
+      scroll: 'SCROLL',
+      mockTag: 'YOUR DRONE FOOTAGE', mockEyebrow: 'MONTRÉAL — RENOVATION · SINCE 2014',
+      mockH1: 'BUILT', mockH2: 'TO LAST.', mockNavA: 'SERVICES', mockNavB: 'PROJECTS', mockBtn: 'GET A QUOTE',
+      navMenu: 'MENU',
+      chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
+      chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
+      chAerial: '— AERIAL',
+      bandLine: 'We fly drones for a living.',
+      whyTitleA: 'No site, no ', whyTitleHl: 'leads.',
+      exTitleL1: 'THE', exTitleL2: 'FRAME', exTitleL3: 'GALLERY.',
+      processTitle: "ONE WEEK. HERE'S HOW.",
+      pricingT1: 'Real prices. Starting at ', pricingT0: '$0.',
+      previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
+      styleWhy: 'STYLE — WARM', styleExamples: 'STYLE — EDITORIAL', styleProcess: 'STYLE — BLUEPRINT',
+      stylePricing: 'STYLE — STATEMENT', stylePreview: 'STYLE — SPOTLIGHT',
+      examplesSub: 'No fake clients. Concept builds and our own sites, labeled as exactly that.',
+      tileBorealTag: 'CONTRACTOR', tileBorealName: 'Boréal — Renovation', badgeConcept: 'CONCEPT — DEMO',
+      tileRealtorTag: 'REAL ESTATE', tileRealtorName: 'ZXY — Property Media', badgeOwn: 'OUR OWN FRAME',
+      tileCreatorTag: 'CREATORS', tileCreatorName: 'ZXY — Creator Sessions',
+      posterDate: 'MONTRÉAL — JULY 10', posterNo: 'SHOT № 58',
+      markBoreal: 'LIVE — CONCEPT', markMatte: '№ 01 — MTL',
+      markCinema: 'ZXY — SESSION 02', markCafe: 'Brume, Mile End',
+      tileCafeTag: 'CAFÉ', tileCafeName: 'Brume — Café',
+      altCafe: 'Café table with espresso and mural — the Brume café concept',
+      altAerial: 'Fireworks over the Jacques-Cartier bridge — ZXY drone media',
+      tileEmptyTag: 'NEXT', tileEmptyLine: 'YOUR BUSINESS — NEXT', tileEmptyCta: 'YOUR FRAME GOES HERE →',
+      emptyUrl: 'yourbusiness.ca',
+      altRealtor: 'ZXY real-estate site hero', altCreator: 'ZXY creator sessions site hero',
+      processSub: 'The week, station by station. Every build runs the same one.',
+      procD1: 'D1', procD2: 'D2', procD3: 'D3–4', procD4: 'D5', procD5: 'D6', procD6: 'D7',
+      procT1: 'THE CALL', procB1: 'Everything we need, in one conversation.',
+      procT2: 'THE DRAFT', procB2: 'Structure and copy, in both languages.',
+      procT3: 'THE BUILD', procB3: 'The full site goes up on a private preview link.',
+      procT4: 'YOUR PASS', procB4: 'One review. Mark everything.',
+      procT5: 'THE FIX', procB5: 'Every note closed.',
+      procT6: 'HANDOFF', procB6: 'Live. Owned. Yours.',
+      pricingSub: 'One build, no retainer. Hosting is optional and the preview costs nothing.',
+      tier1Name: 'THE SITE', tier1Price: '$797', tier1a: 'The full site, built for you',
+      tier2Name: 'HOSTING + UPDATES', tier2Price: '$59/mo', tier2a: 'First month included', tierPop: 'BEST VALUE',
+      tier3Name: 'SITE + SHOOT', tier3Price: 'from $897', tier3a: 'Site + drone/photo day',
+      tierBoth: 'Both languages', tierBoth2: 'Updates handled for you', tierBoth3: '24-hour media delivery',
+      tierWeek: 'Live in a week', tierWeek2: 'Members: 25% off one shoot a year', tierWeek3: 'Both languages',
+      tzPrice: '$0', tzTitle: 'THE PREVIEW', tzBody: "Price your build after you've seen it.",
+      formTradeDetail: 'WHAT DO YOU DO?', formOptional: '(OPTIONAL)',
+      formTradeDetailPh: 'e.g. Landscaping, plumbing, café…',
+      forgeHud: 'THIS IS THE PREVIEW WE BUILD', forgeDefault: 'YOUR BUSINESS, FRAMED.',
+      forgeUrlDefault: 'yoursite.ca', forgeBrand: 'YOUR BUSINESS', forgeEyebrow: 'MONTRÉAL — YOUR TRADE',
+      inclLabel: 'EVERY BUILD INCLUDES',
+      inclList: 'Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build, you own it.',
+      previewSub: 'We build a working preview of your site. You look at it. Then we talk.',
+      prevChip1: '$0 PREVIEW', prevChip2: 'NO DEPOSIT', prevChip3: 'NO MEETING',
+      formBusiness: 'BUSINESS NAME', formBusinessPh: 'e.g. Boréal Rénovation',
+      formName: 'YOUR NAME', formPhone: 'PHONE', formTrade: 'YOUR TRADE',
+      tradePick: 'Choose…', tradeContractor: 'Contractor / Renovation', tradeRealtor: 'Realtor',
+      tradeCreator: 'Creator', tradeOther: 'Other',
+      formSubmit: 'GET MY FREE PREVIEW',
+      orText: '— OR —', smsChip: 'TEXT US', callChip: 'CALL',
+      asideNote: 'Straight to us. No call centre.',
+      smsHref: 'sms:5142604573?&body=PREVIEW%20—%20',
+      pillText: 'TEXT US — FREE PREVIEW',
+      footPitch: 'Bilingual websites for Montréal businesses. Built in a week. Yours.',
+      footMade: 'Designed and hosted in Montréal.',
+      altEspresso: 'Espresso pour at a Montréal café — shot by ZXY',
+      altDusk: 'Dusk over a Montréal street — the Boréal concept hero, shown in both languages',
+      whyCard1Tag: 'BILINGUAL', whyCard1Title: 'Both languages. Hand-written.',
+      whyCard1Body: 'No translate button. Real French and real English on every page, so Loi 96 is covered and customers find you in both languages.',
+      whyToggleProof: "Press FR. That's the product. →",
+      whyCard2Tag: 'YOURS', whyCard2Title: 'You own every piece.',
+      whyCard2Body: 'Domain, files, hosting: all in your name. Nobody holds your site hostage for a monthly fee.',
+      whyCard3Tag: 'IN A WEEK', whyCard3Title: 'Live in seven days.',
+      whyCard3Body: 'From the first call to the keys, mapped day by day.',
+      whyCard3Link: 'THE PROCESS →',
+      whyMoat: 'No photos? We fly drones for a living. Your footage is the add-on, not your homework.',
+      stat1l: 'LANGUAGES', stat2l: 'DAYS', stat3l: 'YOURS'
+    },
+    fr: {
+      langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
+      eyebrow: 'MONTRÉAL — SITES WEB · BILINGUE · LOI 96',
+      l1: 'BÂTISSEZ', l2pre: 'VOTRE ', l2frame: 'CADRE', l2post: '', l3: 'ENSEMBLE.',
+      sub1: 'Bilingue. Prêt en une semaine. À vous.',
+      cta1: 'OBTENEZ UN APERÇU GRATUIT', cta2: 'VOIR DES EXEMPLES',
+      scroll: 'DÉFILER',
+      mockTag: 'VOS IMAGES DRONE', mockEyebrow: 'MONTRÉAL — RÉNOVATION · DEPUIS 2014',
+      mockH1: 'BÂTI', mockH2: 'POUR DURER.', mockNavA: 'SERVICES', mockNavB: 'PROJETS', mockBtn: 'SOUMISSION',
+      navMenu: 'MENU',
+      chWhy: '01 — POURQUOI', chExamples: '02 — EXEMPLES', chProcess: '03 — PROCESSUS',
+      chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL',
+      chAerial: '— AÉRIEN',
+      bandLine: 'On pilote des drones pour gagner notre vie.',
+      whyTitleA: 'Pas de site, pas de ', whyTitleHl: 'soumission.',
+      exTitleL1: 'LA', exTitleL2: 'GALERIE', exTitleL3: 'DES CADRES.',
+      processTitle: 'UNE SEMAINE. VOICI COMMENT.',
+      pricingT1: 'Des prix réels. À partir de ', pricingT0: '0 $.',
+      previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
+      styleWhy: 'STYLE — CHALEUREUX', styleExamples: 'STYLE — ÉDITORIAL', styleProcess: 'STYLE — PLAN',
+      stylePricing: 'STYLE — MANIFESTE', stylePreview: 'STYLE — PROJECTEUR',
+      examplesSub: "Pas de faux clients. Des concepts et nos propres sites, étiquetés pour ce qu'ils sont.",
+      tileBorealTag: 'ENTREPRENEUR', tileBorealName: 'Boréal — Rénovation', badgeConcept: 'CONCEPT — DÉMO',
+      tileRealtorTag: 'IMMOBILIER', tileRealtorName: 'ZXY — Médias immobiliers', badgeOwn: 'NOTRE PROPRE CADRE',
+      tileCreatorTag: 'CRÉATEURS', tileCreatorName: 'ZXY — Sessions créateurs',
+      posterDate: 'MONTRÉAL — 10 JUILLET', posterNo: 'PLAN № 58',
+      markBoreal: 'EN DIRECT — CONCEPT', markMatte: '№ 01 — MTL',
+      markCinema: 'ZXY — SESSION 02', markCafe: 'Brume, Mile End',
+      tileCafeTag: 'CAFÉ', tileCafeName: 'Brume — Café',
+      altCafe: "Table de café avec espresso et murale — le concept café Brume",
+      altAerial: "Feux d'artifice au-dessus du pont Jacques-Cartier — média drone ZXY",
+      tileEmptyTag: 'PROCHAIN', tileEmptyLine: 'VOTRE ENTREPRISE — LA PROCHAINE', tileEmptyCta: 'VOTRE CADRE VA ICI →',
+      emptyUrl: 'votreentreprise.ca',
+      altRealtor: 'Héros du site immobilier ZXY', altCreator: 'Héros du site sessions créateurs ZXY',
+      processSub: 'La semaine, étape par étape. La même pour chaque projet.',
+      procD1: 'J1', procD2: 'J2', procD3: 'J3–4', procD4: 'J5', procD5: 'J6', procD6: 'J7',
+      procT1: "L'APPEL", procB1: "Tout ce qu'il faut, en une conversation.",
+      procT2: 'LE TRACÉ', procB2: 'Structure et textes, dans les deux langues.',
+      procT3: 'LE MONTAGE', procB3: "Le site complet se monte sur un lien d'aperçu privé.",
+      procT4: 'VOTRE REGARD', procB4: 'Une révision. Notez tout.',
+      procT5: 'LES RETOUCHES', procB5: 'Chaque note réglée.',
+      procT6: 'CLÉ EN MAIN', procB6: 'En ligne. À vous.',
+      pricingSub: "Un seul montage, pas de rétention. L'hébergement est optionnel et l'aperçu ne coûte rien.",
+      tier1Name: 'LE SITE', tier1Price: '797 $', tier1a: 'Le site complet, monté pour vous',
+      tier2Name: 'HÉBERGEMENT + MISES À JOUR', tier2Price: '59 $/mois', tier2a: 'Premier mois inclus', tierPop: 'MEILLEUR RAPPORT',
+      tier3Name: 'SITE + TOURNAGE', tier3Price: 'dès 897 $', tier3a: 'Site + journée drone/photo',
+      tierBoth: 'Les deux langues', tierBoth2: 'Mises à jour prises en charge', tierBoth3: 'Livraison des médias en 24 h',
+      tierWeek: 'En ligne en une semaine', tierWeek2: 'Membres : 25 % de rabais sur un tournage par année', tierWeek3: 'Les deux langues',
+      tzPrice: '0 $', tzTitle: "L'APERÇU", tzBody: "Fixez le prix après l'avoir vu.",
+      formTradeDetail: 'QUE FAITES-VOUS?', formOptional: '(FACULTATIF)',
+      formTradeDetailPh: 'ex. : Aménagement, plomberie, café…',
+      forgeHud: "VOICI L'APERÇU QU'ON CONSTRUIT", forgeDefault: 'VOTRE ENTREPRISE, ENCADRÉE.',
+      forgeUrlDefault: 'votresite.ca', forgeBrand: 'VOTRE ENTREPRISE', forgeEyebrow: 'MONTRÉAL — VOTRE MÉTIER',
+      inclLabel: 'CHAQUE SITE INCLUT',
+      inclList: "Bilingue (Loi 96) · Mobile d'abord · Hébergement inclus · SEO de base · Un seul montage, c'est à vous.",
+      previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle.",
+      prevChip1: 'APERÇU 0 $', prevChip2: 'AUCUN DÉPÔT', prevChip3: 'PAS DE RENCONTRE',
+      formBusiness: "NOM DE L'ENTREPRISE", formBusinessPh: 'ex. : Boréal Rénovation',
+      formName: 'VOTRE NOM', formPhone: 'TÉLÉPHONE', formTrade: 'VOTRE MÉTIER',
+      tradePick: 'Choisir…', tradeContractor: 'Entrepreneur / Rénovation', tradeRealtor: 'Courtier immobilier',
+      tradeCreator: 'Créateur', tradeOther: 'Autre',
+      formSubmit: 'OBTENEZ MON APERÇU GRATUIT',
+      orText: '— OU —', smsChip: 'TEXTEZ-NOUS', callChip: 'APPELEZ',
+      asideNote: "Direct à nous. Pas de centre d'appels.",
+      smsHref: 'sms:5142604573?&body=APER%C3%87U%20—%20',
+      pillText: 'TEXTEZ-NOUS — APERÇU GRATUIT',
+      footPitch: 'Sites web bilingues pour les entreprises de Montréal. Prêts en une semaine. À vous.',
+      footMade: 'Conçu et hébergé à Montréal.',
+      altEspresso: 'Café espresso dans un café montréalais — signé ZXY',
+      altDusk: "Crépuscule sur une rue de Montréal — le héros du concept Boréal, montré dans les deux langues",
+      whyCard1Tag: 'BILINGUE', whyCard1Title: 'Les deux langues. Écrites à la main.',
+      whyCard1Body: "Pas de bouton « traduire ». Du vrai français et du vrai anglais sur chaque page : la Loi 96 est couverte, et vos clients vous trouvent dans les deux langues.",
+      whyToggleProof: "Appuyez sur EN. C'est ça, le produit. →",
+      whyCard2Tag: 'À VOUS', whyCard2Title: 'Chaque morceau vous appartient.',
+      whyCard2Body: "Domaine, fichiers, hébergement : tout à votre nom. Personne ne prend votre site en otage avec des mensualités.",
+      whyCard3Tag: 'EN UNE SEMAINE', whyCard3Title: 'En ligne en sept jours.',
+      whyCard3Body: 'Du premier appel à la remise des clés, jour par jour.',
+      whyCard3Link: 'LE PROCESSUS →',
+      whyMoat: "Pas de photos? Le drone, c'est notre métier. Vos images sont une option, pas un devoir.",
+      stat1l: 'LANGUES', stat2l: 'JOURS', stat3l: 'À VOUS'
+    }
+  };
+  var lang = 'en';
+  function apply() {
+    var dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.textContent = dict[k];
+    });
+    // attribute i18n: data-i18n-attrs="attr=key,attr2=key2" (placeholders, sms body, aria)
+    document.querySelectorAll('[data-i18n-attrs]').forEach(function (el) {
+      el.getAttribute('data-i18n-attrs').split(',').forEach(function (pair) {
+        var kv = pair.split('=');
+        if (dict[kv[1]] != null) el.setAttribute(kv[0], dict[kv[1]]);
+      });
+    });
+    document.documentElement.lang = lang;
+  }
+  function setLang(l, persist) {
+    lang = l;
+    if (persist) { try { localStorage.setItem('zxy-lang', l); } catch (e) {} }
+    apply();
+  }
+  var btn = document.getElementById('lang-toggle');
+  if (btn) btn.addEventListener('click', function () { setLang(lang === 'en' ? 'fr' : 'en', true); });
+  // toggle-as-proof (#why card): flips the whole page — the demo IS the product.
+  var tp = document.getElementById('toggle-proof');
+  if (tp && btn) tp.addEventListener('click', function () {
+    btn.click();
+    tp.classList.remove('pulse'); void tp.offsetWidth; tp.classList.add('pulse');
+  });
+
+  // dev-only drift check (runs on the pristine EN DOM, before any language apply):
+  // hardcoded EN markup must byte-match the en dict or the EN→FR→EN roundtrip corrupts.
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (I18N.en[k] == null) { console.warn('[i18n] missing en key:', k); return; }
+      if (el.textContent !== I18N.en[k])
+        console.warn('[i18n drift]', k, JSON.stringify(el.textContent), '!=', JSON.stringify(I18N.en[k]));
+    });
+    Object.keys(I18N.en).forEach(function (k) {
+      if (I18N.fr[k] == null) console.warn('[i18n] key missing in fr:', k);
+    });
+  }
+
+  // LANGUAGE PICK — texted ?lang=fr links always win, then the visitor's saved
+  // choice, then the browser language (a French Montréal phone gets French first
+  // paint). This script is synchronous at body end, so applying here beats first
+  // paint: no EN flash. Saved-choice persistence only on explicit signals
+  // (toggle press / ?lang link), never on the sniff.
+  var urlLang = null;
+  try { urlLang = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  var stored = null;
+  try { stored = localStorage.getItem('zxy-lang'); } catch (e) {}
+  var pref =
+    (urlLang === 'fr' || urlLang === 'en') ? urlLang :
+    (stored === 'fr' || stored === 'en') ? stored :
+    ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  if (pref !== 'en') setLang(pref, urlLang != null);
+})();
+</script>
+
+<!-- Nav scroll state + axes mark draw-in (hero UI only — does NOT touch the fluid sim) -->
+<script>
+(function () {
+  // Navbar: transparent (scrim) over the hero, solid black once scrolled past it.
+  var nav = document.getElementById('hero-nav');
+  if (nav) {
+    var onScroll = function () {
+      nav.classList.toggle('scrolled', window.scrollY > (window.innerHeight - 90));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  // Axes mark: one-time draw-in on load, then static (no looping state).
+  var ax = document.getElementById('axisGlyph');
+  if (ax) { requestAnimationFrame(function () { ax.classList.add('ax-animate'); }); }
+  // Mobile disclosure nav: works with zero JS; this only closes it after a tap.
+  var mnav = document.getElementById('nav-mobile');
+  if (mnav) {
+    mnav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mnav.removeAttribute('open'); });
+    });
+  }
+})();
+</script>
+
+<!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
+<script defer src="site.js?v=44"></script>
+
+<!-- Fluid engine -->
+<script type="module" src="fluid-hero.js?v=6"></script>
+</body>
+</html>

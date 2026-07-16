@@ -372,12 +372,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
   .gear-item { transition: border-color 0.25s, background 0.25s, transform 0.25s ease; }
   .gear-item:hover { transform: translateY(-3px); }
   /* Nav underline */
-  .nav-links a:not(.nav-cta):not(.lang-toggle) { position: relative; }
-  .nav-links a:not(.nav-cta):not(.lang-toggle)::after {
+  .nav-links a:not(.nav-cta):not(.lang-toggle):not(.nav-websites) { position: relative; }
+  .nav-links a:not(.nav-cta):not(.lang-toggle):not(.nav-websites)::after {
     content: ''; position: absolute; bottom: -3px; left: 0;
     width: 0; height: 1px; background: currentColor; transition: width 0.25s ease;
   }
-  .nav-links a:not(.nav-cta):not(.lang-toggle):hover::after { width: 100%; }
+  .nav-links a:not(.nav-cta):not(.lang-toggle):not(.nav-websites):hover::after { width: 100%; }
 }
 
 /* Hero photo parallax — driven by JS */
@@ -946,3 +946,21 @@ body.nav-open { overflow: hidden; }
   border-color: var(--blue-bright) !important;
 }
 .mobile-nav-cta.blue-cta:hover { background: var(--blue-mid) !important; }
+
+
+/* ===== /websites entry — the Ghost Frame (V2, Zay 2026-07-16) ===============
+   Red bracket + blue bracket; hover floods purple — the fluid page's whole
+   story (red meets blue, purple is born) performed in a quarter second. */
+.nav-websites {
+  position: relative;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 2px;
+  padding: .45rem 1rem;
+  letter-spacing: .08em;
+  transition: color .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.nav-websites::before, .nav-websites::after { content: ''; position: absolute; width: 9px; height: 9px; transition: border-color .25s ease; }
+.nav-websites::before { top: -1px; left: -1px; border-top: 2px solid #ff4438; border-left: 2px solid #ff4438; }
+.nav-websites::after { bottom: -1px; right: -1px; border-bottom: 2px solid #2b7fd4; border-right: 2px solid #2b7fd4; }
+.nav-websites:hover { background: #7a4fd3; border-color: #9166e8; color: #fff !important; box-shadow: 0 10px 40px -10px rgba(145,102,232,.55); }
+.nav-websites:hover::before, .nav-websites:hover::after { border-color: #fff; }
