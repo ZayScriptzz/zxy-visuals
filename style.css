@@ -419,6 +419,9 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
   .footer{padding:3rem 2rem}
 }
 @media(max-width:600px){
+  #nav{padding-left:0.9rem;padding-right:0.9rem}
+  #nav.scrolled{padding-left:0.9rem;padding-right:0.9rem}
+  .nav-links{gap:0.7rem}
   .hero{min-height:480px}
   .services-grid{grid-template-columns:1fr}
   .hero-title{font-size:clamp(3.5rem,15vw,6rem)}
