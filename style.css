@@ -395,8 +395,10 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:
 @media(max-width:900px){
   #nav{padding:1.25rem 2rem}
   #nav.scrolled{padding:0.75rem 2rem}
-  .nav-links a:not(.nav-cta):not(.lang-toggle):not(.nav-back){display:none}
+  .nav-links a:not(.nav-cta):not(.lang-toggle):not(.nav-back):not(.nav-websites){display:none}
   .nav-back{font-size:0.72rem !important;letter-spacing:0.12em !important}
+  .nav-links{gap:0.9rem}
+  .nav-websites{font-size:0.7rem;padding:.35rem .55rem;letter-spacing:.06em}
   .hamburger{display:flex}
   .hero-content{padding:0 2rem}
   .hero-scroll-indicator,.hero-badges{display:none}
