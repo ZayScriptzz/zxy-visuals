@@ -327,9 +327,9 @@
     // phones swap the source down to the 720p rendition
     if (window.innerWidth <= 820) {
       var bandSrc = bandVideo.querySelector('source');
-      if (bandSrc) { bandSrc.src = 'assets/aerial-reveal-720.mp4'; bandVideo.load(); }
+      if (bandSrc) { bandSrc.src = 'assets/aerial-reveal-720.mp4?v=2'; bandVideo.load(); }
     } else {
-      bandVideo.poster = 'assets/aerial-poster.jpg';
+      bandVideo.poster = 'assets/aerial-poster.jpg?v=2';
     }
     new IntersectionObserver(function (es) {
       es.forEach(function (en) {
